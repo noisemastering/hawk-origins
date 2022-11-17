@@ -1,0 +1,102 @@
+<div class="container-fluid" *ngIf="working"> 
+    <app-spinner></app-spinner>
+  </div>
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br>
+    <div class="alert alert-danger" *ngIf="!permission"><mat-icon>pan_tool</mat-icon> No es posible borrar este registro ya que existen datos que dependen de él</div>
+    <br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+          <div class="form-group row">
+            <div class="col-lg-10">&nbsp;</div>  
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/elemento.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>
+          <hr>
+					<h4>Datos Generales</h4>
+					<div class="form-group row">
+            <label class="col-sm-2 col-form-label">ID</label>	
+            <div class="col-lg-8"> 
+              <mat-form-field>
+                <input type="text" matInput formControlName="itemID" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Clave de identificación.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input type="text" matInput formControlName="descripcion" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Identifique la categoría con un nombre.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Notas *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..." readonly></textarea>
+              </mat-form-field>
+              <small class="form-text text-muted">Breve reseña del tipo de productos que maneja esta categoría.</small>
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>
+          
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Creación</label>	
+            <div class="col-lg-3"> 
+              <mat-form-field>
+                <input type="text" matInput formControlName="fechaCreacion" readonly>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-2 col-form-label">Creó</label>
+            <div class="col-lg-3"> 
+              <mat-form-field>
+                <input type="text" matInput formControlName="usuarioCreacion" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Modificación</label>	
+            <div class="col-lg-3"> 
+              <mat-form-field>
+                <input type="text" matInput formControlName="ultimaModificacion" readonly>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-2 col-form-label">Modificó</label>
+            <div class="col-lg-3"> 
+              <mat-form-field>
+                <input type="text" matInput formControlName="usuarioModificacion" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-10"*ngIf="!permission">
+              <div class="alert alert-danger"><mat-icon>pan_tool</mat-icon> No es posible borrar este registro ya que existen datos que dependen de él</div>
+            </div>
+            <div class="col-md-8"*ngIf="permission">
+              &nbsp;
+            </div>
+            <div class="col-md-2"*ngIf="permission">
+              <button mat-raised-button (click)="validate()" color="warn">Eliminar <mat-icon>delete</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+              <button mat-raised-button (click)="onClose()" color="primary">Cancelar <mat-icon>clear</mat-icon></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br>
+    <div class="alert alert-danger" *ngIf="!permission"><mat-icon>pan_tool</mat-icon> No es posible borrar este registro ya que existen datos que dependen de él</div>
+    <br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+            <div class="form-group row">
+                <div class="col-lg-10">&nbsp;</div>  
+                <div class="col-lg-2">
+                  <span class="text-right"><img src="assets/images/pages/almacenes.png" class="img-fluid" alt=""></span>  
+                </div>
+              </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ID</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input type="text" placeholder="Nombre del almacén" matInput formControlName="itemID" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Nombre con el que identificará el almacén.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input type="text" placeholder="Nombre del almacén" matInput formControlName="descripcion" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Nombre con el que identificará el almacén.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Descripción *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..." readonly></textarea>
+              </mat-form-field>
+              <small class="form-text text-muted">Datos descriptivos del almacén.</small>
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+              <div class="col-md-6">
+                  <div class="alert alert-danger" *ngIf="!permission"><mat-icon>pan_tool</mat-icon> No es posible borrar este registro ya que existen datos que dependen de él</div>
+              </div>
+              <div class="col-md-2">
+                &nbsp;
+              </div>
+              <div class="col-md-2">	
+                <button mat-raised-button (click)="delete()" color="primary" *ngIf="permission">Eliminar <mat-icon>delete_sweep</mat-icon></button>
+              </div>
+              <div class="col-md-2">	
+                <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+              </div>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

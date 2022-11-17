@@ -1,0 +1,199 @@
+<div class="container" *ngIf="working">
+  <app-spinner></app-spinner>
+</div>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Conteos físicos</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios'">Inventarios</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Conteos físicos</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-12">
+          <!-- ======== Workspace ======== -->	
+    <div class="dashboard-right">
+        <div class="dashboard">
+            <div class="row">
+                <div class="col-lg-10">
+                    <div class="page-title">
+                        <div class="welcome-msg">
+                            <h3 class="text-left">Conteos físicos</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <span class="text-right"><img src="assets/images/pages/conteos.png" class="img-fluid" alt=""></span>
+                </div>
+            </div> 
+            <hr class="my-5" />
+            <div class="row section-b-space">
+                <div class="col-lg-8">
+                    <h4>Almacén</h4>
+                    <h4>Locación</h4>
+                </div>
+                <div class="col-lg-4">
+                    <button mat-raised-button (click)="onAlmacen()" color="primary">
+                        Cambiar de locación <mat-icon>cached</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="row section-b-space">
+                <div class="col-lg-12">
+                      <div class="mat-elevation-z8">
+                          <mat-table [dataSource]="dataSource" matSort>
+                            <ng-container matColumnDef="ID_Articulo">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                                <mat-cell *matCellDef="let element">{{element.ID_Articulo}}</mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="Descripcion">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>Artículo</mat-header-cell>
+                                <mat-cell *matCellDef="let element; let index = index">
+                                    <editable (update)="updateField(index, 'Descripcion')">
+                                        <ng-template viewMode>
+                                        {{element.Descripcion}}
+                                        </ng-template>
+                                        <ng-template editMode>
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput [formControl]="getControl(index, 'Descripcion')">
+                                            <mat-error *ngIf="getControl(index, 'Descripcion').hasError('required')">
+                                            Field is <strong>required</strong>
+                                            </mat-error>
+                                            </mat-form-field>
+                                            <!-- <input  [formControl]="getControl(index, 'name')" focusable editableOnEnter> -->
+                                        </ng-template>
+                                    </editable> 
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="umexb">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>UM Base</mat-header-cell>
+                                <mat-cell *matCellDef="let element; let index = index">
+                                    <editable (update)="updateField(index, 'umexb')">
+                                        <ng-template viewMode>
+                                        {{element.umexb}}
+                                        </ng-template>
+                                        <ng-template editMode>
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput [formControl]="getControl(index, 'umexb')">
+                                            <mat-error *ngIf="getControl(index, 'umexb').hasError('required')">
+                                            Field is <strong>required</strong>
+                                            </mat-error>
+                                            </mat-form-field>
+                                            <!-- <input  [formControl]="getControl(index, 'name')" focusable editableOnEnter> -->
+                                        </ng-template>
+                                    </editable> 
+                                    &nbsp; {{element.umb}}
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="umex1">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>UM Esp 1</mat-header-cell>
+                                <mat-cell *matCellDef="let element; let index = index">
+                                    <editable (update)="updateField(index, 'umex1')">
+                                        <ng-template viewMode>
+                                        {{element.umex1}}
+                                        </ng-template>
+                                        <ng-template editMode>
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput [formControl]="getControl(index, 'umex1')">
+                                            <mat-error *ngIf="getControl(index, 'umex1').hasError('required')">
+                                            Field is <strong>required</strong>
+                                            </mat-error>
+                                            </mat-form-field>
+                                            <!-- <input  [formControl]="getControl(index, 'name')" focusable editableOnEnter> -->
+                                        </ng-template>
+                                    </editable> 
+                                    &nbsp;{{element.um1}}
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="umex2">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>UM Esp 2</mat-header-cell>
+                                <mat-cell *matCellDef="let element; let index = index">
+                                    <editable (update)="updateField(index, 'umex2')">
+                                        <ng-template viewMode>
+                                        {{element.umex2}}
+                                        </ng-template>
+                                        <ng-template editMode>
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput [formControl]="getControl(index, 'umex2')">
+                                            <mat-error *ngIf="getControl(index, 'umex2').hasError('required')">
+                                            Field is <strong>required</strong>
+                                            </mat-error>
+                                            </mat-form-field>
+                                            <!-- <input  [formControl]="getControl(index, 'name')" focusable editableOnEnter> -->
+                                        </ng-template>
+                                    </editable> 
+                                    &nbsp; {{element.um2}}
+                                </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="umex3">
+                                <mat-header-cell *matHeaderCellDef mat-sort-header>UM Esp 3</mat-header-cell>
+                                <mat-cell *matCellDef="let element; let index = index">
+                                    <editable (update)="updateField(index, 'umex3')">
+                                        <ng-template viewMode>
+                                        {{element.umex3}}
+                                        </ng-template>
+                                        <ng-template editMode>
+                                            <mat-form-field class="example-full-width">
+                                            <input matInput [formControl]="getControl(index, 'umex3')">
+                                            <mat-error *ngIf="getControl(index, 'umex3').hasError('required')">
+                                            Field is <strong>required</strong>
+                                            </mat-error>
+                                            </mat-form-field>
+                                            <!-- <input  [formControl]="getControl(index, 'name')" focusable editableOnEnter> -->
+                                        </ng-template>
+                                    </editable> 
+                                    &nbsp;{{element.um3}}
+                                </mat-cell>
+                            </ng-container>
+                              <ng-container matColumnDef="loading">
+                                  <mat-footer-cell *matFooterCellDef colspan="6">
+                                      Cargando
+                                  </mat-footer-cell>
+                              </ng-container>
+                              <ng-container matColumnDef="noData">
+                                  <mat-footer-cell *matFooterCellDef colspan="6">
+                                      No hay datos disponibles
+                                  </mat-footer-cell>
+                              </ng-container>
+                              <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+                              <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+                              <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataSource!=null}"></mat-footer-row>
+                              <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataSource!=null)}"></mat-footer-row>
+                          </mat-table>
+                      </div>
+                  </div>
+              </div>
+              <hr class="my-5" />
+            <div class="form-group row">
+                <div class="col-md-6">
+                    &nbsp;
+                </div>
+                <div class="col-md-2">	
+                    <button mat-raised-button (click)="onUpdate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+                </div>
+                <div class="col-md-2">	
+                    <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+                </div>
+            </div>
+          </div>
+          <!-- ======== /Workspace ======== -->
+      </div>
+  </div>
+</div>

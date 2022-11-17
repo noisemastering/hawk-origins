@@ -1,0 +1,34 @@
+<div class="icon-nav">
+  <ul>
+    <li class="onhover-div mobile-search search-widgets" id="search-widgets">
+      <div>
+        <img src="assets/images/icon/search.png" (click)="openSearch()" class="img-fluid" alt="">
+        <i class="ti-search" (click)="openSearch()"></i>
+      </div>
+    </li>
+    <li class="onhover-div mobile-setting">
+      <div><img src="assets/images/icon/setting.png" (click)="logout()" class="img-fluid" alt="">
+        <i class="ti-settings"></i></div>
+    </li>
+  </ul>
+</div>
+<!-- Search -->
+<div id="search-overlay" class="search-overlay" *ngIf="show" [ngStyle]="{ 'display': 'block' }">
+  <div>
+    <span class="closebtn" title="Close Overlay" (click)="closeSearch()">×</span>
+    <div class="overlay-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <form>
+              <div class="form-group">
+                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Search a Product">
+              </div>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

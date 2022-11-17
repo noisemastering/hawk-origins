@@ -1,0 +1,302 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Agregar artículo catálogo maestro</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos'">Catálogos</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos/articulos'">Artículos</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos/articulos/maestro'">Catálogo maestro</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Agregar</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<br><br>
+<form [formGroup]='theForm' class="normal-form">
+<mat-tab-group>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <h4>Información General</h4>
+  </ng-template>
+    <div class="container-fluid">
+      <div class="dashboard-right">
+          <div class="dashboard">
+                  <div class="form-group row">
+                      <label class="col-sm-1 col-form-label">Tipo *</label>	
+                      <div class="col-lg-2">
+                        <mat-form-field>
+                          <mat-label>Seleccione una opción</mat-label>
+                          <mat-select formControlName="tipo" (selectionChange)="typeSelected(this)">
+                            <ng-container *ngFor="let t of tipos">
+                              <mat-option value="{{t.id}}">{{t.descripcion}}</mat-option>
+                            </ng-container>
+                          </mat-select>
+                          <mat-error *ngIf="f.tipo.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-lg-7">
+                      </div>
+                      <div class="col-lg-2">
+                          <span class="text-right"><img src="assets/images/pages/articulos.png" class="img-fluid" alt=""></span>  
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Nombre *</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <input type="text" placeholder="Nombre del artículo" matInput formControlName="nombre" (blur)="duplicate('nombre')">
+                            <mat-error *ngIf="f.nombre.errors?.required">Este campo es requerido.</mat-error>
+                            <mat-error *ngIf="f.nombre.errors?.maxlength">Este campo no puede tener más de 24 caracteres.</mat-error>
+                            <mat-error *ngIf="f.nombre.errors?.duplicate">Esta nombre ya existe.</mat-error>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Nombre con el que identificará el artículo.</small>
+                    </div>
+                    <div class="col-sm-1">&nbsp;</div>
+                    <label class="col-sm-1 col-form-label">Categoría *</label>	
+                      <div class="col-lg-2">
+                        <mat-form-field>
+                          <mat-label>Seleccione una opción</mat-label>
+                          <mat-select formControlName="categoria" (selectionChange)="categorySelected(this, $event)">
+                            <ng-container *ngFor="let c of categorias">
+                              <mat-option value="{{c.id}}">{{c.nombre}}</mat-option>
+                            </ng-container>
+                          </mat-select>
+                          <mat-error *ngIf="f.categoria.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">&nbsp;</div>
+                    <label class="col-sm-1 col-form-label">Subcategoría *</label>	
+                      <div class="col-lg-2">
+                        <mat-form-field>
+                          <mat-label>Seleccione una opción</mat-label>
+                          <mat-select formControlName="subcategoria">
+                            <ng-container *ngFor="let s of subcategorias">
+                              <mat-option value="{{s.nombre}}">{{s.nombre}}</mat-option>
+                            </ng-container>
+                          </mat-select>
+                          <mat-error *ngIf="f.categoria.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Rendimiento % *</label>	
+                    <div class="col-sm-1">
+                        <mat-form-field>
+                            <input type="text" placeholder="100%" matInput formControlName="rendimiento">
+                            <mat-error *ngIf="f.rendimiento.errors?.required">Este campo es requerido.</mat-error>
+                            <mat-error *ngIf="f.rendimiento.errors?.max">No puedes exceder del 100%</mat-error>
+                            <mat-error *ngIf="f.rendimiento.errors?.min">El valor mínimo es de 1%</mat-error>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Rendimiento del artículo.</small>
+                    </div>
+                    <div class="col-sm-1">&nbsp;</div>
+                    <label class="col-sm-1 col-form-label">Unidad de medida *</label>	
+                      <div class="col-lg-2">
+                        <mat-form-field>
+                          <mat-label>Seleccione una opción</mat-label>
+                          <mat-select formControlName="umb">
+                            <ng-container *ngFor="let u of umbs">
+                              <mat-option value="{{u.id}}">{{u.descripcion}}</mat-option>
+                            </ng-container>
+                          </mat-select>
+                          <mat-error *ngIf="f.umb.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-sm-1">&nbsp;</div>
+                      <label class="col-sm-1 col-form-label" *ngIf="granel">Pieza</label>	
+                      <div class="col-sm-1" *ngIf="granel">
+                          <mat-form-field>
+                              <input type="text" placeholder="1" matInput formControlName="unidad">
+                              <mat-error *ngIf="f.unidad.errors?.max">No puedes exceder de 1</mat-error>
+                          </mat-form-field>
+                          <small class="form-text text-muted">Proporción de una sola pieza.</small>
+                      </div>
+                      <label class="col-sm-1 col-form-label" *ngIf="unitario">UPC</label>	
+                      <div class="col-sm-1" *ngIf="unitario">
+                          <mat-form-field>
+                              <input type="text" placeholder="00656254878" matInput formControlName="upc">
+                              <mat-error *ngIf="f.upc.errors?.maxLength">No puedes exceder de 13</mat-error>
+                              <mat-error *ngIf="f.upc.errors?.minLength">No puede tener menos de 12 dígitos</mat-error>
+                          </mat-form-field>
+                          <small class="form-text text-muted">Código de barras del producto.</small>
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Palabras clave *</label>
+                      <div class="col-sm-8">
+                        <mat-form-field class="demo-chip-list">
+                          <mat-chip-list #chipListKW>
+                            <mat-chip *ngFor="let keyword of keywords" 
+                                [selectable]="selectable"
+                                [removable]="removable" 
+                                (removed)="remove(keyword)">
+                              {{keyword}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input placeholder="Keywords"
+                                #keysInput
+                                formControlName="keys"  
+                                [matChipInputFor]="chipListKW"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="add($event)"
+                                [matAutocomplete]="autoKW" />
+                          </mat-chip-list>
+                          <mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let key of keyws" [value]="key.Name">
+                              {{ key.Name }} 
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+                      </div>
+                  </div>
+              
+          </div>
+      </div>
+  </div>
+</mat-tab>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <h4>Mermas</h4>
+  </ng-template>
+  <div class="container-fluid">
+    <div class="dashboard-right">
+        <div class="dashboard">
+          <div formArrayName="mermas" *ngFor="let m of theForm.get('mermas')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-group row">
+                <h6>Merma: {{i+1}}</h6>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Concepto *</label>
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <input formControlName="concepto" matInput placeholder="Describa la merma">
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">Valor % *</label>
+                <div class="col-md-1">
+                  <mat-form-field>
+                    <input formControlName="valor" matInput placeholder="Porcentaje de merma">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button mat-raised-button (click)="removeItemMerma(i)" color="accent">Eliminar merma <mat-icon>remove_circle_outline</mat-icon></button>
+                </div>
+                <div class="col-md-5">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-9">&nbsp;</div>
+            <div class="col-md-3">
+              <button mat-raised-button (click)="addItemMerma()" color="accent">Agregar merma <mat-icon>add_circle_outline</mat-icon></button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</mat-tab>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <h4>Presentaciones de compra</h4>
+  </ng-template>
+  <div class="container-fluid">
+    <div class="dashboard-right">
+        <div class="dashboard">
+          <div formArrayName="presentaciones" *ngFor="let m of theForm.get('presentaciones')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-group row">
+                <h6>Presentación: {{i+1}}</h6>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Nombre *</label>
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <input formControlName="nombre" matInput placeholder="Nombre de la localidad">
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">Descripción</label>
+                <div class="col-md-4">
+                  <mat-form-field>
+                    <input formControlName="descripcion" matInput placeholder="Nombre de la localidad">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Unidades</label>
+                <div class="col-md-1">
+                  <mat-form-field>
+                    <input formControlName="unidades" matInput>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-1">
+                  &nbsp;
+                </div>
+                <label class="col-sm-1 col-form-label" *ngIf="!unitario && !pieza">Equivalencia</label>
+                <div class="col-md-1" *ngIf="!unitario && !pieza">
+                  <mat-form-field>
+                    <input formControlName="equivalencia" matInput>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-1">
+                  &nbsp;
+                </div>
+                <label class="col-sm-1 col-form-label">UPC</label>
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <input formControlName="upc" matInput>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button mat-raised-button (click)="removeItemPresentacion(i)" color="accent">Eliminar presentación <mat-icon>remove_circle_outline</mat-icon></button>
+                </div>
+                <div class="col-md-1">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-9">&nbsp;</div>
+            <div class="col-md-3">
+              <br><br>
+              <button mat-raised-button (click)="addItemPresentacion()" color="accent">Agregar presentación <mat-icon>add_circle_outline</mat-icon></button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</mat-tab>
+</mat-tab-group>
+<hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-6">
+              <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+              <button mat-raised-button (click)="resetForm()">Vaciar <mat-icon>delete_sweep</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+                <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+              </div>
+          </div>
+</form> 

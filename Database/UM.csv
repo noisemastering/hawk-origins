@@ -1,0 +1,5 @@
+ID,Descripcion,Dimension,Notas,DefaultNuevos,crFecha,crUsuario,uaFecha,uaUsuario
+Kg,Kilogramos,P,,,,,5/20/14,Admin
+Lt,Litros,V,,,8/24/04,Admin,5/20/14,Admin
+Mt,Metro,O,,,5/27/14,Admin,5/27/14,Admin
+Pza,Pieza,O,,1,1/24/06,ADMIN,4/11/06,ADMIN

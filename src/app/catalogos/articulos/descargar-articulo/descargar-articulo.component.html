@@ -1,0 +1,301 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Agregar artículo</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos'">Catálogos</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos/articulos'">Artículos</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Agregar</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<br><br>
+<form [formGroup]='theForm' class="normal-form">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <h4>Información General</h4>
+      </ng-template>
+      <div class="container-fluid">
+        <div class="dashboard-right">
+            <div class="dashboard">
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Nombre *</label>	
+                <div class="col-lg-2">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="nombre" readonly>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Nombre con el que identificará el artículo.</small>
+                </div>
+                <label class="col-sm-1 col-form-label">ID</label>	
+                <div class="col-lg-2">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="firebaseID" readonly>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Identificador del artículo.</small>
+                </div>
+                <label class="col-sm-1 col-form-label">Tipo</label>	
+                <div class="col-lg-2">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="tipo" readonly>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Tipo de artículo.</small>
+                </div>
+                <div class="col-lg-1">
+                    &nbsp;
+                </div>
+                <div class="col-lg-2">
+                    <span class="text-right"><img src="assets/images/pages/articulos.png" class="img-fluid" alt=""></span>  
+                </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-1 col-form-label">Categoría</label>
+              <div class="col-sm-2">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="categoria" readonly>
+                </mat-form-field>
+              </div>
+              <label class="col-sm-1 col-form-label">Subcategoría</label>
+              <div class="col-sm-2">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="subcategoria" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <!--  Almacén y locación
+            <div class="form-group row">
+              <label class="col-sm-1 col-form-label">Almacén</label>
+                <div class="col-sm-3">
+                <mat-form-field>
+                  <mat-label>Seleccione una opción</mat-label>
+                  <mat-select formControlName="almacen" (selectionChange)="updateDrop('locaciones', f.almacen.value)">
+                    <ng-container *ngFor="let a of almacenes">
+                      <mat-option value="{{a.ID}}">{{a.Descripcion}}</mat-option>
+                    </ng-container>
+                  </mat-select>
+                  <mat-error *ngIf="f.almacen.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                </mat-form-field>
+                </div>
+                <div class="col-sm-2">
+                    <button mat-raised-button (click)="createAlmacen()" color="accent">Crear almacen <mat-icon>add</mat-icon></button>
+                </div>
+                <label class="col-sm-1 col-form-label">Locacion</label>
+                <div class="col-sm-2">
+                  <mat-form-field>
+                    <mat-label>Seleccione una opción</mat-label>
+                    <mat-select formControlName="locacion">
+                      <ng-container *ngFor="let l of locaciones$ | async">
+                        <mat-option value="{{l.ID}}">{{l.Descripcion}}</mat-option>
+                      </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="f.locacion.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                  </mat-form-field>
+                  <small class="form-text text-muted">Este campo se llena al seleccionar almacén</small>
+                </div>
+            </div>
+              -->
+            <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Costo</label>
+                <div class="col-lg-1">
+                    <mat-form-field>
+                        <input type="text" placeholder="$ 0.00" matInput formControlName="costo">
+                    </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">{{ubase}}</label>
+                <div class="col-sm-1">&nbsp;</div>
+                <label class="col-sm-1 col-form-label">Stock máximo</label>
+                <div class="col-lg-1">
+                    <mat-form-field>
+                        <input type="text" placeholder="0.0" matInput formControlName="stockmaximo">
+                    </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">{{ubase}}</label>
+                <div class="col-sm-1">&nbsp;</div>
+                <label class="col-sm-1 col-form-label">Stock mínimo</label>
+                <div class="col-lg-1">
+                    <mat-form-field>
+                        <input type="text" placeholder="0.0" matInput formControlName="stockminimo">
+                    </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">{{ubase}}</label>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Palabras clave *</label>
+                <div class="col-sm-10">
+                  <mat-form-field class="demo-chip-list">
+                    <mat-chip-list #chipListKW>
+                      <mat-chip *ngFor="let keyword of keywords" 
+                          [selectable]="selectable"
+                          [removable]="removable" 
+                          (removed)="remove(keyword)">
+                        {{keyword}}
+                        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                      </mat-chip>
+                      <input placeholder="Keywords"
+                          #keysInput
+                          formControlName="keys"  
+                          [matChipInputFor]="chipListKW"
+                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                          [matChipInputAddOnBlur]="addOnBlur"
+                          (matChipInputTokenEnd)="add($event)"
+                          [matAutocomplete]="autoKW" />
+                    </mat-chip-list>
+                    <mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-option *ngFor="let key of keyws" [value]="key.Name">
+                        {{ key.Name }} 
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                  <small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+                </div>
+                <div class="col-sm-2">&nbsp;</div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <h4>Presentaciones de compra</h4>
+      </ng-template>
+      <div class="container-fluid">
+        <div class="dashboard-right">
+            <div class="dashboard">
+              <div formArrayName="presentaciones" *ngFor="let m of theForm.get('presentaciones')['controls']; let i = index;">
+                <div [formGroupName]="i">
+                  <div class="form-group row">
+                    <h6>Presentación: {{i+1}}</h6>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Nombre *</label>
+                    <div class="col-md-2">
+                      <mat-form-field>
+                        <input formControlName="nombre" matInput placeholder="Nombre de la localidad">
+                      </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label">Descripción</label>
+                    <div class="col-md-4">
+                      <mat-form-field>
+                        <input formControlName="descripcion" matInput placeholder="Nombre de la localidad">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Unidades</label>
+                    <div class="col-md-1">
+                      <mat-form-field>
+                        <input formControlName="unidades" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-1">
+                      &nbsp;
+                    </div>
+                    <label class="col-sm-1 col-form-label" *ngIf="!unitario && !pieza">Equivalencia</label>
+                    <div class="col-md-1" *ngIf="!unitario && !pieza">
+                      <mat-form-field>
+                        <input formControlName="equivalencia" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-1">
+                      &nbsp;
+                    </div>
+                    <label class="col-sm-1 col-form-label">UPC</label>
+                    <div class="col-md-2">
+                      <mat-form-field>
+                        <input formControlName="upc" matInput>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                      <button mat-raised-button (click)="removeItemPresentacion(i)" color="accent">Eliminar presentación <mat-icon>remove_circle_outline</mat-icon></button>
+                    </div>
+                    <div class="col-md-1">
+                      &nbsp;
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-9">&nbsp;</div>
+                <div class="col-md-3">
+                  <br><br>
+                  <button mat-raised-button (click)="addItemPresentacion(this)" color="accent">Agregar presentación <mat-icon>add_circle_outline</mat-icon></button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+  <ng-template mat-tab-label>
+    <h4>Mermas</h4>
+  </ng-template>
+  <div class="container-fluid">
+    <div class="dashboard-right">
+        <div class="dashboard">
+          <div formArrayName="mermas" *ngFor="let m of theForm.get('mermas')['controls']; let i = index;">
+            <div [formGroupName]="i">
+              <div class="form-group row">
+                <h6>Merma: {{i+1}}</h6>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-1 col-form-label">Concepto *</label>
+                <div class="col-md-2">
+                  <mat-form-field>
+                    <input formControlName="concepto" matInput placeholder="Describa la merma">
+                  </mat-form-field>
+                </div>
+                <label class="col-sm-1 col-form-label">Valor % *</label>
+                <div class="col-md-1">
+                  <mat-form-field>
+                    <input formControlName="valor" matInput placeholder="Porcentaje de merma">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2">
+                  <button mat-raised-button (click)="removeItemMerma(i)" color="accent">Eliminar merma <mat-icon>remove_circle_outline</mat-icon></button>
+                </div>
+                <div class="col-md-5">
+                  &nbsp;
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md-9">&nbsp;</div>
+            <div class="col-md-3">
+              <button mat-raised-button (click)="addItemMerma(this)" color="accent">Agregar merma <mat-icon>add_circle_outline</mat-icon></button>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</mat-tab>
+  </mat-tab-group>
+  <hr class="my-5" />
+  <div class="form-group row">
+    <div class="col-md-6">
+      <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+    </div>
+    <div class="col-md-2">
+      <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+    </div>
+    <div class="col-md-2">	
+      <!--<button mat-raised-button (click)="resetForm()">Vaciar <mat-icon>delete_sweep</mat-icon></button>-->
+    </div>
+    <div class="col-md-2">	
+      <!--<button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>-->
+    </div>
+  </div>
+</form>

@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br><br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+          <div class="form-group row">
+            <div class="col-lg-10">&nbsp;</div>  
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/categorias.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>
+          <hr>
+					<div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre *</label>	
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input type="text" placeholder="Nombre de la categoría" matInput formControlName="descripcion" (blur)="duplicate('razon')">
+                <mat-error *ngIf="f.descripcion.errors?.required">Este campo es requerido.</mat-error>
+                <mat-error *ngIf="f.descripcion.errors?.minlength">Este campo debe terner al menos 4 caracteres.</mat-error>
+                <mat-error *ngIf="f.descripcion.errors?.duplicate">Esta categoría ya existe.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Identifique la categoría con un nombre.</small>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Notas *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+                <mat-error *ngIf="f.notas.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                <mat-error *ngIf="f.notas.errors?.maxlength" class="error-message">Este campo no debe exceder los 160 caracteres.</mat-error>
+                <mat-error *ngIf="f.notas.errors?.minlength" class="error-message">Este campo debe terner al menos 10 caracteres.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Breve reseña del tipo de productos que maneja esta categoría.</small>
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Palabras clave *</label>
+            <div class="col-sm-10">
+              <mat-form-field class="demo-chip-list">
+                <mat-chip-list #chipListKW>
+                  <mat-chip *ngFor="let keyword of keywords" 
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="remove(keyword)">
+                    {{keyword}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Keywords"
+                      #keysInput
+                      formControlName="keys"  
+                      [matChipInputFor]="chipListKW"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)"
+                      [matAutocomplete]="autoKW" />
+                </mat-chip-list>
+                <mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let key of keyws" [value]="key.Name">
+                    {{ key.Name }} 
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-8">
+              <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+              <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

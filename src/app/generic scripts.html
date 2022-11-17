@@ -1,0 +1,185 @@
+<!-- Loader -->
+<div class="container" *ngIf="working">
+    <app-spinner></app-spinner>
+</div>
+<!-- Termina Loader -->
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Agregar artículo</h2>
+                </div>
+            </div> 
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos'">Catálogos</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos/articulos'">Artículos</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Agregar</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+
+
+<!-- Tabla -->
+<div class="row">
+    <div class="col-lg-12">
+      <div class="search-div">
+          <button mat-raised-button (click)="onCreate()" color="primary">
+              Nuevo <mat-icon>add</mat-icon>
+          </button>
+      <mat-form-field class="search-form-field" floatLabel="never">
+          <input matInput [ngModelOptions]="{standalone: true}" [(ngModel)]="searchKey" placeholder="Búsqueda" autocomplete="off" (keyup)="applyFliter()">
+          <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()"><mat-icon>close</mat-icon></button>
+      </mat-form-field>
+  </div>
+  <div class="mat-elevation-z8">
+      <mat-table [dataSource]="listData" matSort>
+          <ng-container matColumnDef="Nombre">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Locación</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.NALocacion.Nombre}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Almacen">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Almacén</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.NALocacion.NAAlmacen.Nombre}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Maximo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Min. Stock</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.StockMinimo}} {{currentUMB}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Minimo">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Max. Stock</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.StockMaximo}} {{currentUMB}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="Existencias">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Existencias</mat-header-cell>
+              <mat-cell *matCellDef="let element">{{element.ExistenciaFisica}} {{currentUMB}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="acciones">
+              <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+              <mat-cell *matCellDef="let row">
+                  <button mat-icon-button (click)="onDetail(row)"><mat-icon>details</mat-icon></button>
+                  <button mat-icon-button (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+                  <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button>
+              </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="loading">
+              <mat-footer-cell *matFooterCellDef colspan="6">
+                  Cargando
+              </mat-footer-cell>
+          </ng-container>
+          <ng-container matColumnDef="noData">
+              <mat-footer-cell *matFooterCellDef colspan="6">
+                  No hay locaciones ligadas a este artículo
+              </mat-footer-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+      </mat-table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+  </div>
+  </div>
+  </div>
+  <!-- Termina Tabla -->
+
+<!-- Mat Select -->
+  <div class="col-sm-3">
+    <mat-form-field>
+        <mat-label>Seleccione una opción</mat-label>
+        <mat-select formControlName="almacen" (selectionChange)="updateDrop('locaciones', f.almacen.value)">
+            <ng-container *ngFor="let a of almacenes">
+                <mat-option value="{{a.ID}}">{{a.Descripcion}}</mat-option>
+            </ng-container>
+        </mat-select>
+        <mat-error *ngIf="f.almacen.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+    </mat-form-field>
+</div>
+<!-- Termina Mat Select --> 
+
+<!-- Mat input textarea -->
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label">Descripción *</label>	
+    <div class="col-lg-8">
+      <mat-form-field>
+        <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+        <mat-error *ngIf="f.notas.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+        <mat-error *ngIf="f.notas.errors?.maxlength" class="error-message">Este campo no debe exceder los 160 caracteres.</mat-error>
+        <mat-error *ngIf="f.notas.errors?.minlength" class="error-message">Este campo debe terner al menos 10 caracteres.</mat-error>
+      </mat-form-field>
+      <small class="form-text text-muted">Datos descriptivos del centro de consumo.</small>
+    </div>
+    <div class="col-sm-2">&nbsp;</div>
+  </div>
+<!-- Termina Mat input textarea -->
+
+<!-- Mat input text -->
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Punto de Venta</label>	
+    <div class="col-lg-8">
+      <mat-form-field>
+        <input type="text" placeholder="TPV" matInput formControlName="tpv">
+      </mat-form-field>
+      <small class="form-text text-muted">Identificador del punto de venta.</small>
+    </div>
+  </div>
+  <!-- Termina Mat input text -->
+
+  <!-- Pestañas -->
+  <mat-tab-group>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <h4>Información General</h4>
+        </ng-template>
+        <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <h4>Información General</h4>
+        </ng-template>
+        <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <h4>Información General</h4>
+        </ng-template>
+        <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <h4>Información General</h4>
+        </ng-template>
+        <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                </div>
+            </div>
+        </div>
+    </mat-tab>
+  </mat-tab-group>
+  <!-- Termina Pestañas-->

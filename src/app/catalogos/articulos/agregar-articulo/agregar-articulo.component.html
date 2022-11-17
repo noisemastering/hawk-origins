@@ -1,0 +1,300 @@
+<div class="container" *ngIf="working">
+    <app-spinner></app-spinner>
+</div>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Agregar artículo</h2>
+                </div>
+            </div> 
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos'">Catálogos</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos/articulos'">Artículos</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Agregar</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<br><br>
+<div class="container-fluid">
+    <div class="dashboard-right">
+        <div class="dashboard">
+            <form [formGroup]='theForm' class="normal-form">
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Nombre *</label>	
+                    <div class="col-lg-4">
+                        <mat-form-field>
+                            <input type="text" placeholder="Nombre del artículo" matInput formControlName="descripcion" (blur)="duplicate('nombre')">
+                            <mat-error *ngIf="f.descripcion.errors?.required">Este campo es requerido.</mat-error>
+                            <mat-error *ngIf="f.descripcion.errors?.maxlength">Este campo no puede tener más de 24 caracteres.</mat-error>
+                            <mat-error *ngIf="f.descripcion.errors?.duplicate">Esta nombre ya existe.</mat-error>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Nombre con el que identificará el artículo.</small>
+                    </div>
+                    <label class="col-sm-1 col-form-label">Estatus</label>
+                    <div class="col-lg-4">
+                        <mat-radio-group formControlName="activo" aria-label="Select an option" [(ngModel)]="estatus">
+                            <mat-radio-button value="1" color="primary">Activo</mat-radio-button>
+                            <mat-radio-button value="0" color="primary">Inactivo</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="col-lg-2">
+                        <span class="text-right"><img src="assets/images/pages/articulos.png" class="img-fluid" alt=""></span>  
+                    </div>
+                </div>
+                <div class="form-group row">
+					<label class="col-sm-1 col-form-label">Almacén</label>
+					<div class="col-sm-3">
+						<mat-form-field>
+							<mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="almacen" (selectionChange)="updateDrop('locaciones', f.almacen.value)">
+								<ng-container *ngFor="let a of almacenes">
+									<mat-option value="{{a.ID}}">{{a.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+							<mat-error *ngIf="f.almacen.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+						</mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <button mat-raised-button (click)="createAlmacen()" color="accent">Crear almacen <mat-icon>add</mat-icon></button>
+                    </div>
+                    <label class="col-sm-1 col-form-label">Locacion</label>
+					<div class="col-sm-2">
+						<mat-form-field>
+							<mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="locacion">
+								<ng-container *ngFor="let l of locaciones$ | async">
+									<mat-option value="{{l.ID}}">{{l.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+							<mat-error *ngIf="f.locacion.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+						</mat-form-field>
+						<small class="form-text text-muted">Este campo se llena al seleccionar almacén</small>
+					</div>
+                </div>
+                <div class="form-group row">
+					<label class="col-sm-1 col-form-label">Categoría</label>
+					<div class="col-sm-2">
+						<mat-form-field>
+							<mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="categoria" (selectionChange)="updateDrop('subcategorias', f.categoria.value)">
+								<ng-container *ngFor="let c of categorias">
+									<mat-option value="{{c.ID}}">{{c.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+							<mat-error *ngIf="f.categoria.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+						</mat-form-field>
+                    </div>
+                    <div class="col-sm-2">
+                        <button mat-raised-button (click)="createCategoria()" color="accent">Crear categoría <mat-icon>add</mat-icon></button>
+                    </div>
+                    <label class="col-sm-1 col-form-label">Subcategoría</label>
+					<div class="col-sm-2">
+						<mat-form-field>
+							<mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="subcategoria">
+								<ng-container *ngFor="let s of subcategorias$ | async">
+									<mat-option value="{{s.ID}}">{{s.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+							<mat-error *ngIf="f.subcategoria.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+						</mat-form-field>
+						<small class="form-text text-muted">Este campo se llena al seleccionar categoría</small>
+                    </div>
+                    <div class="col-sm-2">
+                        <button mat-raised-button (click)="createSubcategoria()" color="accent">Crear subcategoría <mat-icon>add</mat-icon></button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">U M B</label>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+							<mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="umb" (selectionChange)="selectedU($event)">
+								<ng-container *ngFor="let b of umbs">
+									<mat-option value="{{b.ID}}">{{b.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+							<mat-error *ngIf="f.umb.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+						</mat-form-field>
+                        <small class="form-text text-muted">Unidad de medida base</small>
+                    </div>
+                    <label class="col-sm-1 col-form-label">U M C</label>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="umc">
+								<ng-container *ngFor="let o of umcs">
+									<mat-option value="{{o.ID}}">{{o.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+                            <mat-error *ngIf="f.umc.errors?.required">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Unidad de medida para compra</small>
+                    </div>
+                    <label class="col-sm-1 col-form-label">U M V</label>
+                    <div class="col-sm-2">
+                        <mat-form-field>
+                            <mat-label>Seleccione una opción</mat-label>
+							<mat-select formControlName="umv">
+								<ng-container *ngFor="let v of umvs">
+									<mat-option value="{{v.ID}}">{{v.Descripcion}}</mat-option>
+								</ng-container>
+							</mat-select>
+                            <mat-error *ngIf="f.umv.errors?.required">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Unidad de medida para venta</small>
+                    </div>
+                    <div class="col-sm-1">&nbsp;</div>
+                    <div class="col-sm-2">
+                        <button mat-raised-button (click)="createUM()" color="accent">Crear UM <mat-icon>add</mat-icon></button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Stock mínimo</label>
+                    <div class="col-sm-1">
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="sMinimo">
+                            <mat-error *ngIf="f.descripcion.errors?.maxlength">Este campo no puede tener más de 24 caracteres.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label">{{currentUMB}}</label>
+                    <label class="col-sm-2 col-form-label">Stock máximo</label>
+                    <div class="col-sm-1">
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="sMaximo">
+                            <mat-error *ngIf="f.descripcion.errors?.maxlength">Este campo no puede tener más de 24 caracteres.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label">{{currentUMB}}</label>
+                    <label class="col-sm-1 col-form-label">Costo $</label>
+                    <div class="col-sm-1">
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="costo">
+                            <mat-error *ngIf="f.descripcion.errors?.maxlength">Este campo no puede tener más de 24 caracteres.</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label"> p/{{currentUMB}}</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">IVA</label>
+                    <div class="col-lg-1">
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="iva">
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label">%</label>
+                    <label class="col-sm-1 col-form-label">IEPS</label>
+                    <div class="col-lg-1">
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="ieps">
+                        </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label">%</label>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Periodicidad para conteo</label>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="diario">Diario</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="semanal">Semanal</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="quincenal">Quincenal</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="mensual">Mensual</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="bimestral">Bimestral</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="trimestral">Trimestral</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="semestral">Semestral</mat-checkbox>
+                    </div>
+                    <div class="col-sm-1">
+                        <mat-checkbox color="primary" formControlName="anual">Anual</mat-checkbox>
+                    </div>
+                </div>
+                <div class="form-group row">
+					<label for="example-search-input" class="col-sm-2 col-form-label">Cuenta contable</label>
+					<div class="col-sm-6">
+						<mat-form-field>
+							<input type="text" matInput placeholder="" formControlName="cuentaContable">
+						</mat-form-field>
+						<small id="emailHelp" class="form-text text-muted">Puede quedar en blanco.</small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="example-search-input" class="col-sm-2 col-form-label">Comentarios</label>
+					<div class="col-sm-10">
+						<mat-form-field>
+							<textarea   matInput formControlName="notas" rows="3" placeholder="Comentarios, notas y observaciones"></textarea>
+						</mat-form-field>
+				    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Palabras clave *</label>
+                    <div class="col-sm-10">
+                      <mat-form-field class="demo-chip-list">
+                        <mat-chip-list #chipListKW>
+                          <mat-chip *ngFor="let keyword of keywords" 
+                              [selectable]="selectable"
+                              [removable]="removable" 
+                              (removed)="remove(keyword)">
+                            {{keyword}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input placeholder="Keywords"
+                              #keysInput
+                              formControlName="keys"  
+                              [matChipInputFor]="chipListKW"
+                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                              [matChipInputAddOnBlur]="addOnBlur"
+                              (matChipInputTokenEnd)="add($event)"
+                              [matAutocomplete]="autoKW" />
+                        </mat-chip-list>
+                        <mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let key of keyws" [value]="key.Name">
+                            {{ key.Name }} 
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                      <small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+                    </div>
+                    <div class="col-sm-2">&nbsp;</div>
+                  </div>
+                <hr class="my-5" />
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+                    </div>
+                    <div class="col-md-2">
+                        <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+                    </div>
+                    <div class="col-md-2">	
+                        <button mat-raised-button (click)="resetForm()">Vaciar <mat-icon>delete_sweep</mat-icon></button>
+                    </div>
+                    <div class="col-md-2">	
+                        <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+

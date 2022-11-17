@@ -1,0 +1,12 @@
+<p>
+  ingreso-por-scanner works!
+</p>
+<!--The content below is only a placeholder and can be replaced.-->
+<ngx-sw-scanner-detection
+  (scan)="handle($event)"
+  [config]="{}"
+>
+  <input #input>
+</ngx-sw-scanner-detection>
+
+<button (click)="simulateScanner()">Scanner Simulation</button>

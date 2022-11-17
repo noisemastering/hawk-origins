@@ -1,0 +1,85 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br><br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+          <div class="form-group row">
+            <div class="col-lg-10">&nbsp;</div>  
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/recetas.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>	
+          <hr class="my-5" />
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ID</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input readonly type="text" matInput formControlName="id">
+              </mat-form-field>
+              <small class="form-text text-muted">ID del artículo a agregar.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input type="text" matInput formControlName="nombre" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Nombre del artículo a agregar.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Cantidad *</label>	
+            <div class="col-lg-1">
+                <mat-form-field>
+                    <input type="text" matInput formControlName="cantidad"> 
+                </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">{{articulo.Ubase}}</label>	
+            <label class="col-sm-1 col-form-label">&nbsp;</label>
+
+            <label class="col-sm-1 col-form-label">Rendimiento</label>	
+            <div class="col-lg-1">
+                <mat-form-field>
+                    <input type="text" matInput formControlName="rendimiento" readonly>
+                  </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">%</label>
+
+            <label class="col-sm-1 col-form-label">Costo $</label>	
+            <div class="col-lg-1">
+                <mat-form-field>
+                    <input type="text" matInput formControlName="costo" readonly>
+                  </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">/{{articulo.Ubase}}</label>
+          </div>
+          <!--========================== /Adaptar a los campos y validaciones requeridos ================================-->
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-6">
+              <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+            </div>
+            <div class="col-md-3">
+              <button mat-raised-button (click)="validate()" color="primary" *ngIf="!existe1">Agregar a receta <mat-icon>add</mat-icon></button>
+              <div class="alert alert-danger" *ngIf="existe1"> Este artículo ya está en la receta principal</div>
+            </div>
+            <div class="col-md-3">	
+              <!--
+              <button mat-raised-button (click)="validate()" color="secondary" *ngIf="!existe2">Agregar a subreceta <mat-icon>add</mat-icon></button>
+              <div class="alert alert-danger" *ngIf="existe2"> Este artículo ya está en la subreceta</div>
+              -->
+            </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

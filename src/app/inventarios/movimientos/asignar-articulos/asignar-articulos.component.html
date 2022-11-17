@@ -1,0 +1,187 @@
+<!-- Loader -->
+<div class="container" *ngIf="working">
+  <app-spinner></app-spinner>
+</div>
+<!-- Termina Loader -->
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Asignar artículos a almacén</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios'">Inventarios</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios/compras'">Compras</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Asignar artículos</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End --> 
+<br><br>
+<form [formGroup]='theForm' class="normal-form">
+    <div class="container-fluid">
+        <div class="col-md-12">
+          <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                    <div class="col-lg-10"><h4>Detalle de la compra</h4></div>  
+                    <div class="col-lg-2">
+                        <span class="text-right"><img src="assets/images/pages/consumo.png" class="img-fluid" alt=""></span>  
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Proveedor</label>	
+                  <div class="col-sm-3">
+                    <mat-form-field>
+                        <input type="text" matInput formControlName="proveedor" readonly>
+                    </mat-form-field>
+                  </div>
+                    <label class="col-sm-1 col-form-label">&nbsp;</label>	
+                  <label class="col-sm-2 col-form-label">Razón social</label>	
+                  <div class="col-sm-2">
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="razonsocial" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">No. de factura</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="factura" readonly>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                    <label class="col-sm-1 col-form-label">Fecha de factura</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                                <input matInput formControlName="fechaFactura" readonly>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Descripción *</label>	
+                  <div class="col-lg-8">
+                    <mat-form-field>
+                      <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-2">&nbsp;</div>
+                </div>
+                <div class="form-group row">
+                  <h4>Seleccione un destino</h4>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-1 col-form-label">Almacén</label>	
+                  <div class="col-sm-3">
+                    <mat-form-field>
+                        <mat-label>Seleccione una opción</mat-label>
+                        <mat-select formControlName="almacenSelect" (selectionChange)="updateDrop(this)">
+                            <ng-container *ngFor="let a of almacenes">
+                                <mat-option value="{{a.AlmacenID}}">{{a.Nombre}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                  <div class="col-lg-1">&nbsp;</div>
+                  <label class="col-sm-1 col-form-label">Locación</label>	
+                  <div class="col-sm-3">
+                    <mat-form-field>
+                        <mat-label>Seleccione una opción</mat-label>
+                        <mat-select formControlName="locacionSelect" (selectionChange)="updateLoc(this)">
+                            <ng-container *ngFor="let l of locaciones$">
+                                <mat-option value="{{l.LocacionID}}">{{l.Nombre}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+              </div>
+                <hr class="my-5" />
+                <div class="form-group row">
+                  <div class="col-lg-10"><h4>Artículos de la compra</h4></div>  
+                </div>
+                <div class="form-group row">
+                  <div class="col-lg-12">
+                    <div class="mat-elevation-z8">
+                      <mat-table [dataSource]="listData" matSort>
+                          <ng-container matColumnDef="FirebaseID">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Presentacion.Articulo.FirebaseID}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Nombre">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Presentacion.Articulo.Nombre}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Presentacion">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Presentacion</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Presentacion.Nombre}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Costo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Costo</mat-header-cell>
+                            <mat-cell *matCellDef="let element">$ {{element.Costo}}</mat-cell>
+                        </ng-container>
+                          <ng-container matColumnDef="Cantidad">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Disponible</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Disponible}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Mover">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>A mover</mat-header-cell>
+                            <mat-cell *matCellDef="let element">{{element.Added}} {{element.Tipo}} </mat-cell>
+                        </ng-container>
+                          <ng-container matColumnDef="Acciones">
+                              <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                  <button mat-icon-button (click)="onAdd(row)"><mat-icon>add</mat-icon></button>
+                                  <button mat-icon-button (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+                                  <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button>
+                              </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="loading">
+                              <mat-footer-cell *matFooterCellDef colspan="6">
+                                  Cargando
+                              </mat-footer-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="noData">
+                              <mat-footer-cell *matFooterCellDef colspan="6">
+                                  No hay artículos ligados a esta compra
+                              </mat-footer-cell>
+                          </ng-container>
+                          <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+                          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+                          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+                      </mat-table>
+                      <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+                  </div>
+                </div>
+
+
+                </div>  
+                <hr class="my-5" />
+                <div class="form-group row">
+                  <div class="col-md-8">
+                    <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+                  </div>
+                  <div class="col-md-2">
+                    <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+                  </div>
+                  <div class="col-md-2">	
+                      <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>

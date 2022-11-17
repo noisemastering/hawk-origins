@@ -1,0 +1,165 @@
+<div class="container-fluid" *ngIf="working"> 
+    <app-spinner></app-spinner>
+  </div>
+  <div class="container-fluid">
+    <div class="col-md-12">
+      <mat-toolbar color="primary">
+        <span class="fill-remaining-space"></span>
+        <span>{{title}}</span>
+        <span class="fill-remaining-space"></span>
+        <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+      </mat-toolbar>
+      <br><br>
+      <div class="dashboard-right">
+        <div class="dashboard">
+          <form [formGroup]='theForm' class="normal-form">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">ID</label>	
+              <div class="col-lg-8"> 
+                <mat-form-field>
+                  <input type="text" matInput formControlName="itemID" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Clave de identificación.</small>
+              </div> 
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Nombre *</label>	
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <input type="text" placeholder="Nombre del cliente" matInput formControlName="descripcion" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Identifique al cliente con un nombre.</small>
+              </div>
+              <div class="col-lg-5">&nbsp;</div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Dirección 1 *</label>	
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <input type="text" placeholder="Dirección 1" matInput formControlName="direccion1" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Indique una dirección para este cliente.</small>
+              </div>
+              <div class="col-lg-5">&nbsp;</div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Dirección 2</label>	
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <input type="text" placeholder="Dirección 2" matInput formControlName="direccion2" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Indique una segunda dirección para este cliente (opcional).</small>
+              </div>
+              <div class="col-lg-5">&nbsp;</div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Dirección 3</label>	
+              <div class="col-lg-5">
+                <mat-form-field>
+                  <input type="text" placeholder="Dirección 3" matInput formControlName="direccion3" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Indique una tercera dirección para este cliente (opcional).</small>
+              </div>
+              <div class="col-lg-5">&nbsp;</div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Teléfonos</label>	
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="telefonos" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Teléfono del cliente.</small>
+              </div>
+              <label class="col-sm-2 col-form-label">Código Postal</label>	
+              <div class="col-lg-2">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="cp" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Código postal del cliente.</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Ciudad</label>	
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="ciudad" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Ciudad del cliente.</small>
+              </div>
+              <label class="col-sm-2 col-form-label">Estado</label>	
+              <div class="col-lg-2">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="estado" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Estadp del cliente.</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Delegación/Municipio</label>	
+              <div class="col-lg-3">
+                <mat-form-field>
+                  <input type="text" matInput formControlName="delegacionMunicipio" readonly>
+                </mat-form-field>
+                <small class="form-text text-muted">Ciudad del cliente.</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-1 col-form-label">Estatus</label>
+              <div class="col-lg-4">
+                  <mat-radio-group formControlName="turno" aria-label="Select an option" [(ngModel)]="currentShift" readonly>
+                      <mat-radio-button value="M" color="primary">Matutino</mat-radio-button>
+                      <mat-radio-button value="V" color="primary">Vespertino</mat-radio-button>
+                  </mat-radio-group>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Notas *</label>	
+              <div class="col-lg-8">
+                <mat-form-field>
+                  <textarea formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..." readonly></textarea>
+                </mat-form-field>
+                <small class="form-text text-muted">Breve reseña del tipo de productos que maneja esta categoría.</small>
+              </div>
+              <div class="col-sm-2">&nbsp;</div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Creación</label>	
+              <div class="col-lg-3"> 
+                <mat-form-field>
+                  <input type="text" matInput formControlName="fechaCreacion" readonly>
+                </mat-form-field>
+              </div>
+              <label class="col-sm-2 col-form-label">Creó</label>
+              <div class="col-lg-3"> 
+                <mat-form-field>
+                  <input type="text" matInput formControlName="usuarioCreacion" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">Modificación</label>	
+              <div class="col-lg-3"> 
+                <mat-form-field>
+                  <input type="text" matInput formControlName="ultimaModificacion" readonly>
+                </mat-form-field>
+              </div>
+              <label class="col-sm-2 col-form-label">Modificó</label>
+              <div class="col-lg-3"> 
+                <mat-form-field>
+                  <input type="text" matInput formControlName="usuarioModificacion" readonly>
+                </mat-form-field>
+              </div>
+            </div>
+            <hr class="my-5" />
+            <div class="form-group row">
+              <div class="col-md-10">&nbsp;</div>
+              <div class="col-md-2">	
+                <button mat-raised-button (click)="onClose()" color="primary">OK <mat-icon>clear</mat-icon></button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

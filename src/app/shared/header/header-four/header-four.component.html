@@ -1,0 +1,28 @@
+<!-- header start -->
+<header id="header-type" class="header-type">
+	<div class="mobile-fix-option"></div>
+	<div class="container logo-menu-part">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="main-menu">
+					<div class="menu-left">
+						<div class="brand-logo" id="headerlogo">
+							<a [routerLink]="['/hawk/dashboard']">
+								<img src="assets/images/menu/logo.png" class="img-fluid" alt="">
+							</a>
+						</div>
+					</div>
+					<div class="menu-right pull-right">
+						<div>
+							<app-navbar></app-navbar>
+						</div>
+						<div>
+							<app-header-widgets [shoppingCartItems]="shoppingCartItems"></app-header-widgets>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<!-- header end -->

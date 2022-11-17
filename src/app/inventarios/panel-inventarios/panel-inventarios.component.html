@@ -1,0 +1,130 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Inventarios</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'hawk'">Inicio</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Inventarios</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<!--section start-->
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <app-cart-widget></app-cart-widget>
+            <hr>
+            <app-subcart-widget></app-subcart-widget>
+        </div>
+        <div class="col-md-9">
+            <div class="dashboard-right">
+                <div class="dashboard">
+                    <div class="page-title">
+                        <div class="welcome-msg">
+                            <h2>Opciones disponibles</h2>
+                        </div>
+                    </div>
+                    <section class="collection section-b-space">
+                        <div class="container">
+                            <div class="row partition-collection">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/inventarios/compras'">
+                                            <img src="assets/images/inventarios/traspasosunidades.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Compras</h3>
+                                            <p>Compras y órdenes</p>
+                                            <a [routerLink]="'/hawk/inventarios/compras'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/inventarios/movimientos'">
+                                            <img src="assets/images/inventarios/movimientos.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Movimientos</h3>
+                                            <p>Entradas, salidas y traspasos</p>
+                                            <a [routerLink]="'/hawk/inventarios/movimientos'" class="btn btn-outline">Entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/conteos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Conteos físicos</h3>
+                                            <p>Conteos por almacén</p>
+                                            <a [routerLink]="'/hawk/inventarios/locaciones-por-almacen'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/cierre.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Cierre mensual</h3>
+                                            <p>Unidades base</p>
+                                            <a [routerLink]="'/hawk/inventarios/cierre-mensual'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row section-t-space">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/merma.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Mermas</h3>
+                                            <p>Entradas, salidas y traspasos</p>
+                                            <a [routerLink]="'/hawk/inventarios/mermas'" class="btn btn-outline">Entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/costos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Costos</h3>
+                                            <p>Conteos por almacén</p>
+                                            <a [routerLink]="'/hawk/inventarios/costos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/traspasosunidades.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Traspasos</h3>
+                                            <p>Traspasos entre unidades</p>
+                                            <a [routerLink]="'/hawk/catalogos/traspasos-entre-unidades'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    &nbsp;
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                  <!--Section ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

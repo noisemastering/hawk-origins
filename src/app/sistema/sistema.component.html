@@ -1,0 +1,197 @@
+<app-header-four></app-header-four>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Configuraciones de sistema</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Configuraciones de sistema</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<br><br>
+<form [formGroup]='theForm' class="normal-form">
+        <!-- Pestañas -->
+        <mat-tab-group>
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  <h4>Configuración General</h4>
+              </ng-template>
+              <br><br>
+                  <div class="dashboard">
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <h4>Stock para requisiciones</h4>
+                      <small class="form-text text-muted">Criterio que se utilizará para hacer una requisicón de compra</small>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <mat-form-field>
+                        <mat-label>Seleccione una locación</mat-label>
+                        <mat-select [(value)]="stock" formControlName="stockSelect">
+                          <ng-container *ngFor="let s of StockRequisiciones">
+                            <mat-option value="{{s.ID}}">{{s.Descripcion}}</mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <hr class="my-5" />
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <h4>Tipo de costeo</h4>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <mat-form-field>
+                        <mat-label>Seleccione una locación</mat-label>
+                        <mat-select [(value)]="costeo" formControlName="costeoSelect">
+                          <ng-container *ngFor="let c of TipoCosteo">
+                            <mat-option value="{{c.ID}}">{{c.Descripcion}}</mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                      <small class="form-text text-muted">Criterio desde el cual se va calcular el costo de las materias primas y recetas.</small>
+                    </div>
+                  </div>
+                  <hr class="my-5" />
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <h4>Porcentaje de utilidad en recetas</h4>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+                  <div class="form-group-row">
+                    <div class="col-lg-1">
+                      <mat-form-field>
+                        <input type="text" matInput formControlName="utilidad">
+                      </mat-form-field>
+                    </div>
+                    <label class="col-sm-1 col-form-label">%</label>	
+                  </div>
+                  <hr class="my-5" />
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <h4>Tipo de inventario</h4>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <mat-form-field>
+                        <mat-label>Seleccione una locación</mat-label>
+                        <mat-select [(value)]="inventario" formControlName="inventarioSelect">
+                          <ng-container *ngFor="let i of TipoInventario">
+                            <mat-option value="{{i.ID}}">{{i.Descripcion}}</mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                      <small class="form-text text-muted">Cómo se va a realizar el conteo teórico de inventarios.</small>
+                    </div>
+                  </div>
+                  <hr class="my-5" />
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <h4>Importacion desde</h4>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <mat-form-field>
+                        <mat-label>Seleccione una locación</mat-label>
+                        <mat-select [(value)]="importacion" formControlName="importacionSelect">
+                          <ng-container *ngFor="let m of TipoImportacion">
+                            <mat-option value="{{m.ID}}">{{m.Descripcion}}</mat-option>
+                          </ng-container>
+                        </mat-select>
+                      </mat-form-field>
+                      <small class="form-text text-muted">Sistema punto de venta desde el cual se importarán los datos</small>
+                    </div>
+                  </div>
+                  <hr class="my-5" />
+                  <div class="form-group-row">
+                    <div class="col-lg-3">
+                      <h4>Categoría para inexistentes</h4>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-lg-3">
+                      <mat-form-field>
+                        <input type="text" placeholder="Categoría para recetas inexistentes" matInput formControlName="categoria">
+                      </mat-form-field>
+                      <small class="form-text text-muted">Categoría para recetas inexistentes.</small>
+                    </div>
+                    <div class="col-lg-9">&nbsp;</div>
+                  </div>
+              </div>
+          </mat-tab>
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  <h4>Permisos y acceso</h4>
+              </ng-template>
+              <div class="dashboard-right">
+                  <div class="dashboard">
+                      <div class="form-group row">
+                      </div>
+                  </div>
+              </div>
+          </mat-tab>
+          <mat-tab>
+              <ng-template mat-tab-label>
+                  <h4>Datos de la empresa</h4>
+              </ng-template>
+              <div class="dashboard-right">
+                  <div class="dashboard">
+                      <div class="form-group row">
+                      </div>
+                  </div>
+              </div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <h4>Acerca de</h4>
+            </ng-template>
+            <div class="dashboard-right">
+              <div class="dashboard">
+                <div class="form-group row">
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+        <!-- Termina Pestañas-->
+        <hr class="my-5" />
+        <div class="form-group row">
+          <div class="col-md-6">
+            <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+          </div>
+          <div class="col-md-2">
+            <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+          </div>
+          <div class="col-md-2">	
+            <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+          </div>
+          <div class="col-md-2">	
+            <!--<button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>-->
+          </div>
+        </div> 
+      
+</form>  
+<app-footer-four></app-footer-four>

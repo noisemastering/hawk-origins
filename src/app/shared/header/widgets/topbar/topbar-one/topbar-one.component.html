@@ -1,0 +1,38 @@
+<div class="row" >
+    <div class="col-lg-6">
+      <div class="header-contact">
+        <ul>
+          <li>Sistema Hawk 2.0 para el control de costos e inventarios A y B</li>
+          <li><i class="fa fa-phone" aria-hidden="true"></i>Llámenos: 01 - 811 - 767 - 52</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-6 text-right" *ngIf="!productsService?.catalogMode">
+      <ul class="header-dropdown">
+        <li class="mobile-wishlist">
+          <a [routerLink]="'/home/wishlist'"><i class="fa fa-question" aria-hidden="true"></i>Ayuda</a>
+        </li>
+        <li class="mobile-compare"></li>
+        <li class="onhover-dropdown mobile-account">
+          <i class="fa fa-user" aria-hidden="true"></i> Mi perfil
+          <ul class="onhover-show-div">
+            <li>
+              <a [routerLink]="'/pages/login'" data-lng="en">
+                  Ingresar
+              </a>
+            </li>
+            <li>
+              <a [routerLink]="'/home/one'" data-lng="es">
+                  Salir
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+</div>
+
+
+
+
+

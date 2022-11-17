@@ -1,0 +1,82 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-title">
+          <h2>Movimientos</h2>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <nav aria-label="breadcrumb" class="theme-breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="'hawk'">Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios/'">Inventarios</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Movimientos</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<!--section start-->
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <app-cart-widget></app-cart-widget>
+            <hr>
+            <app-subcart-widget></app-subcart-widget>
+        </div>
+        <div class="col-md-9">
+            <div class="dashboard-right">
+                <div class="dashboard">
+                    <div class="page-title">
+                        <div class="welcome-msg">
+                            <h2>Opciones disponibles</h2>
+                        </div>
+                    </div>
+                    <section class="collection section-b-space">
+                        <div class="container">
+                            <div class="row partition-collection">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/entradas.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Entradas</h3>
+                                            <p>Entradas, salidas y traspasos</p>
+                                            <a [routerLink]="'/hawk/inventarios/movimientos/lista-entradas'" class="btn btn-outline">Entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/salidas.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Salidas</h3>
+                                            <p>Administre a sus proveedores</p>
+                                            <a [routerLink]="'/hawk/inventarios/movimientos/salidas'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/inventarios/traspasos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Traspasos</h3>
+                                            <p>Unidades base</p>
+                                            <a [routerLink]="'/hawk/inventarios/movimientos/traspasos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--Section ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

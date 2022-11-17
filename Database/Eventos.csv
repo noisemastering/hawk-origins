@@ -1,0 +1,7 @@
+ID,ID_Cliente,Descripcion,Status,FechaInicio,FechaFin,ID_Localidad,Direccion,NumComensales,NumBatch,Notas,crFecha,crUsuario,uaFecha,uaUsuario
+909,C01,Cumple Alex,A,00:00.0,59:00.0,1,fdfasfa,1,1,,10:52.5,ADMIN,11:27.5,ADMIN
+89,C02,Cumple Ajax,A,00:00.0,59:00.0,2,,1,1,,16:47.7,ADMIN,16:57.5,ADMIN
+23042019,C0002,Dia de ayer,X,45:00.0,59:00.0,1,,5,0,,45:27.8,ADMIN,06:35.0,ADMIN
+24042019,C01,Día de la referencia,X,00:00.0,59:00.0,2,,10,0,,43:26.6,ADMIN,45:07.3,ADMIN
+BOT,C01,Botanerito,A,05:00.0,59:00.0,2,dddd,1,0,,05:50.1,ADMIN,06:09.0,ADMIN
+XYZ,C03,Dia de los Juanes,A,26:00.0,59:00.0,2,dfdfdfdf,1,1,,26:39.8,ADMIN,26:54.0,ADMIN

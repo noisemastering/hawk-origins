@@ -1,0 +1,222 @@
+<div class="container" *ngIf="working">
+  <app-spinner></app-spinner>
+</div>
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Receta en preparación</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/panel-ventas'">Ventas</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Receta en preparación</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<br><br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-subcart-widget></app-subcart-widget>
+    </div>
+    <div class="col-lg-9">
+      <div class="dashboard-right">
+        <div class="dashboard">
+          <div class="row">
+            <div class="col-lg-10">
+              <div class="page-title">
+                <div class="welcome-msg">
+                  <h3 class="text-left">Detalle de receta</h3>
+                  <h4 *ngIf="recipe.name!='Receta sin nombre' && recipe.name!=''">Elemento de menú asociado: {{recipe.name}}</h4>
+                  <h4>Costo: {{recipe.costo | currency}}</h4>
+                  <h4 *ngIf="pctCalc">Precio calculado: {{recipe.precioCalculado | currency}}</h4>
+                  <h4 *ngIf="precioCalc">Porcentaje de costo: {{recipe.pctCosto | number: '.1-1'}}% </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/recetas.png" class="img-fluid" alt=""></span>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-lg-12">
+              <form [formGroup]='theForm' class="normal-form">
+                <div class="form-group row">
+                  <label class="col-lg-2 col-form-label">Nombre de la receta</label>	
+                  <div class="col-lg-3">
+                      <mat-form-field>
+                          <input type="text" matInput formControlName="nombre" placeholder="Nombre de la receta">
+                      </mat-form-field>
+                      <small class="form-text text-muted">Elija un nombre para la receta.</small>
+                  </div>
+                  <div class="col-lg-8">&nbsp;</div>
+                </div>
+                <!--
+                <br>
+                <div class="form-group row">
+                  <label class="col-lg-3 col-form-label">Asociar con Elemento de Menú:</label>	
+                  <div class="col-lg-7">
+                    <mat-form-field>
+                      <mat-select placeholder="Selecione una opción" formControlName="nombre">
+                        <mat-option *ngFor="let i of dropDownList" [value]="i.ID" >{{ i.Descripcion }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Nombre con el que identificará el almacén.</small>
+                  </div>
+                  <div class="col-lg-2">&nbsp;</div>
+                </div>
+                -->
+                <br>
+                <div class="form-group row">
+                  <div class="col-lg-2">&nbsp;</div>
+                  <label class="col-sm-1 col-form-label">Calcular</label>	
+                  <div class="col-sm-1">
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="calcular">
+                    </mat-form-field>
+                  </div>
+                  <label class="col-sm-1 col-form-label">%</label>	
+                  <div class="col-sm-2">
+                    <mat-form-field>
+                      <mat-select placeholder="Selecione un criterio" formControlName="criterio">
+                        <mat-option *ngFor="let c of criterios" [value]="c.valor" >{{ c.etiqueta }}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-sm-1">&nbsp;</div>
+                  <div class="col-sm-2">
+                    <button mat-raised-button (click)="calculate()" color="accent">Calcular <mat-icon>computer</mat-icon></button>
+                  </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Palabras clave *</label>
+                  <div class="col-lg-10">
+                    <mat-form-field class="demo-chip-list">
+                      <mat-chip-list #chipListKW>
+                        <mat-chip *ngFor="let keyword of keywords" 
+                            [selectable]="selectable"
+                            [removable]="removable" 
+                            (removed)="remove(keyword)">
+                          {{keyword}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Keywords"
+                            #keysInput
+                            formControlName="keys"  
+                            [matChipInputFor]="chipListKW"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            [matChipInputAddOnBlur]="addOnBlur"
+                            (matChipInputTokenEnd)="add($event)"
+                            [matAutocomplete]="autoKW" />
+                      </mat-chip-list>
+                      <mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+                        <mat-option *ngFor="let key of keyws" [value]="key.Name">
+                          {{ key.Name }} 
+                        </mat-option>
+                      </mat-autocomplete>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+                  </div>
+                </div>
+                <br>
+                <div class="form-group row">
+                  <div class="col-md-8">
+                    <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+                  </div>
+                  <div class="col-md-2">	
+                      <button mat-raised-button (click)="validate()" color="primary">Suscribir <mat-icon>cloud_upload</mat-icon></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <hr>
+          <div class="row" *ngIf="!empty">
+            <div class="page-title">
+              <div class="welcome-msg">
+                <h4 class="text-left">Lista de ingredientes</h4>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="search-div">
+                <a routerLink="/hawk/catalogos/articulos">
+                  <button mat-raised-button color="primary">
+                    Agregar ingrediente <mat-icon>add</mat-icon>
+                  </button>
+                </a>
+                <mat-form-field class="search-form-field" floatLabel="never">
+                  <input matInput [(ngModel)]="searchKey" placeholder="Búsqueda" autocomplete="off" (keyup)="applyFliter()">
+                  <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()"><mat-icon>close</mat-icon></button>
+                </mat-form-field>
+              </div>
+              <div class="mat-elevation-z8">
+                <mat-table [dataSource]="listData" matSort>
+                  <ng-container matColumnDef="ID">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.ID}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="name">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="type">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.type}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="qty">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.qty}} {{element.um}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="costo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Costo</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.costo | currency}}</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="rate">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header>Rendimiento</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{element.rate}} %</mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="acciones">
+                    <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                      <button mat-icon-button (click)="onDetail(row)"><mat-icon>details</mat-icon></button>
+                      <button mat-icon-button (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+                      <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_forever</mat-icon></button>
+                    </mat-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="loading">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                      Cargando
+                    </mat-footer-cell>
+                  </ng-container>
+                  <ng-container matColumnDef="noData">
+                    <mat-footer-cell *matFooterCellDef colspan="6">
+                      No hay datos disponibles
+                    </mat-footer-cell>
+                  </ng-container>
+                  <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+                  <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+                  <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+                </mat-table>
+                <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

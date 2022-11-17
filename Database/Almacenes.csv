@@ -1,0 +1,5 @@
+ID,Descripcion,Notas,crFecha,crUsuario,uaFecha,uaUsuario,Nivel,keywords
+1,Almacen General,,3/15/17,sergio,11/2/18,Armando,0,"[""procesados"",""congelados"",""frigoru00edfico""]"
+2,Cocina,,3/15/17,sergio,3/15/17,sergio,0,"[""alacena"",""enlatados"",""conservas""]"
+3,Bar,,11/2/18,Armando,11/2/18,Armando,0,"[""enlatados"",""abarrotes""]"
+4,Cocina Pastas,,5/14/19,Armando,5/14/19,Armando,0,"[""procesados"",""congelados""]"

@@ -1,0 +1,16 @@
+ID,Descripcion,ID_Cuenta,Tipo,Notas,uaFecha,uaUsuario,crFecha,crUsuario
+COMPER,Comida de Personal,,S,,3/4/15,nodefinido,12/15/14,Admin
+EAJUSTE,Entrada por Ajuste,,E,,12/15/14,Admin,12/15/14,Admin
+ECOMP,Entrada por Compras,,E,,12/15/14,Admin,12/15/14,Admin
+EINI,Entrada por inventario inicial,,E,,12/15/14,Admin,12/15/14,Admin
+ENTPROD,Entrada por Producción,,E,,7/4/17,sergio,7/4/17,sergio
+ETRAS,Entrada por Traspaso,,E,,12/15/14,Admin,12/15/14,Admin
+LMPZ,Servicio de Limpieza,,S,,12/15/14,Admin,12/15/14,Admin
+MERM,Merma,,S,,12/15/14,Admin,12/15/14,Admin
+SAJUSTE,Salida por Ajuste,,S,,12/15/14,Admin,12/15/14,Admin
+SALBUF,Salida Buffete,,S,,7/27/17,Armando,7/27/17,Armando
+SALPROD,Salida Produccion,,S,,7/1/15,nodefinido,7/1/15,nodefinido
+SALRENDIM,Salida por Rendimiento,,S,,3/4/15,nodefinido,3/4/15,nodefinido
+SCON,Salida por Consumo,,S,,12/15/14,Admin,12/15/14,Admin
+SERVME,Servicio de Mesa,,S,,3/4/15,nodefinido,12/15/14,Admin
+STRAS,Salida por Traspaso,,S,,12/15/14,Admin,12/15/14,Admin

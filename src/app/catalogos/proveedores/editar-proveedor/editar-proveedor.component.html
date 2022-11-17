@@ -1,0 +1,237 @@
+<app-spinner *ngIf="working"></app-spinner>
+<div class="container-fluid">
+	<div class="col-md-12">
+		<mat-toolbar color="primary">
+			<span class="fill-remaining-space"></span>
+			<span>{{title}}</span>
+			<span class="fill-remaining-space"></span>
+			<button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+	  	</mat-toolbar>
+	  	<br><br>
+	  	<div class="dashboard-right">
+			<div class="dashboard">
+		  		<form [formGroup]='theForm' class="normal-form">
+					<div class="form-group row">
+						<div class="col-lg-10">&nbsp;</div>  
+						<div class="col-lg-2">
+							<span class="text-right"><img src="assets/images/pages/proveedores.png" class="img-fluid" alt=""></span>  
+						</div>
+					</div>	
+					<hr>
+					<h4>Datos Generales</h4>
+					<div class="form-group row">
+					<label class="col-sm-2 col-form-label">ID</label>	
+					<div class="col-lg-8"> 
+						<mat-form-field>
+							<input type="text" matInput formControlName="prov_id" readonly>
+						</mat-form-field>
+						<small class="form-text text-muted">Clave de identificación.</small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Razón Social *</label>	
+					<div class="col-lg-8">
+						<mat-form-field>
+							<input type="text" placeholder="Puede ser el mismo que la razón social" matInput formControlName="razon" (blur)="duplicate('razon')">
+							<mat-error *ngIf="f.razon.errors?.required">Este campo es requerido.</mat-error>
+							<mat-error *ngIf="f.razon.errors?.minlength">Este campo debe terner al menos 6 caracteres.</mat-error>
+							<mat-error *ngIf="f.razon.errors?.duplicate">Esta razón social ya existe.</mat-error>
+						</mat-form-field>
+						<small class="form-text text-muted">Tal como aparece en su registro del SAT.</small>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Descripción *</label>	
+					<div class="col-lg-8">
+						<mat-form-field>
+							<textarea   formControlName="descripcion" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+							<mat-error *ngIf="f.descripcion.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+							<mat-error *ngIf="f.descripcion.errors?.maxlength" class="error-message">Este campo no debe exceder los 160 caracteres.</mat-error>
+							<mat-error *ngIf="f.descripcion.errors?.minlength" class="error-message">Este campo debe terner al menos 10 caracteres.</mat-error>
+						</mat-form-field>
+						<small class="form-text text-muted">Breve reseña del tipo de productos que maneja este proveedor.</small>
+					</div>
+					<div class="col-sm-2">&nbsp;</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-sm-2 col-form-label">Palabras clave *</label>
+					<div class="col-sm-10">
+						<mat-form-field class="demo-chip-list">
+							<mat-chip-list #chipListKW>
+								<mat-chip *ngFor="let keyword of keywords" 
+										[selectable]="selectable"
+										[removable]="removable" 
+										(removed)="remove(keyword)">
+									{{keyword}}
+									<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+								</mat-chip>
+								<input placeholder="Keywords"
+										#keysInput
+										formControlName="keys"  
+										[matChipInputFor]="chipListKW"
+										[matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+										[matChipInputAddOnBlur]="addOnBlur"
+										(matChipInputTokenEnd)="add($event)"
+										[matAutocomplete]="autoKW" />
+							</mat-chip-list>
+							<mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+								<mat-option *ngFor="let key of keyws" [value]="key.Name">
+									{{ key.Name }} 
+								</mat-option>
+							</mat-autocomplete>
+						</mat-form-field>
+						<small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+					</div>
+					<div class="col-sm-2">&nbsp;</div>
+				</div>
+				<hr />
+					  <h4 class="mt-3 mb-3">Datos fiscales</h4>
+					  <div class="form-group row">
+						  <label class="col-sm-2 col-form-label">RFC *</label>
+						  <div class="col-sm-4">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="RFC con homoclave" formControlName="rfc" oninput="this.value = this.value.toUpperCase()" (blur)="duplicate('rfc')">
+								  <mat-error *ngIf="f.rfc.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+								  <mat-error *ngIf="f.rfc.errors?.minlength" class="error-message">Este campo debe tener al menos 12 caracteres.</mat-error>
+								  <mat-error *ngIf="f.rfc.errors?.maxlength" class="error-message">Este campo no puede tener más de 13 caracteres.</mat-error>
+								  <mat-error *ngIf="f.rfc.errors?.duplicate" class="error-message">Este RFC ya existe.</mat-error>
+							  </mat-form-field>
+							  <small class="form-text text-muted">12 caracteres para persona moral o 13 para persona física.</small>
+						  </div>
+						  <label class="col-sm-2 col-form-label">CURP</label>
+						  <div class="col-sm-4">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="CURP" formControlName="curp" oninput="this.value = this.value.toUpperCase()" (blur)="duplicate('curp')">
+								  <mat-error *ngIf="(f.curp.errors?.maxlength || f.curp.errors?.minlength)" class="error-message">Este campo sólo puede tener 18 caracteres.</mat-error>
+								  <mat-error *ngIf="f.curp.errors?.duplicate" class="error-message">Este CURP ya existe.</mat-error>
+							  </mat-form-field>
+							  <small class="form-text text-muted">18 caracteres.</small>
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label class="col-sm-2 col-form-label">Dom. Fiscal *</label>
+						  <div class="col-sm-10">
+							  <mat-form-field>
+								  <input type="text" matInput placeholder="Calle y número" formControlName="calle">
+								  <mat-error *ngIf="f.calle.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+							  </mat-form-field>
+							  <small class="form-text text-muted">No escriba colonia, este dato lo ingresará con el código postal.</small>
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label class="col-sm-2 col-form-label">C. P. </label>
+						  <div class="col-sm-2">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="" formControlName="cp">
+								  <mat-error *ngIf="f.cp.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+								  <mat-error *ngIf="(f.cp.errors?.maxlength || f.cp.errors?.minlength)" class="error-message">Este campo sólo puede tener 5 números.</mat-error>
+							  </mat-form-field>
+						  </div>
+						  <div class="col-sm-2">
+							  <button (click)="getZips()" mat-raised-button class="btn btn-lg btn-primary">Validar</button>
+						  </div>
+						  <div class="col-sm-6">
+							  <mat-form-field>
+								  <mat-label>Seleccione un CP</mat-label>
+								  <mat-select formControlName="zipID">
+									  <ng-container *ngFor="let z of zips$ | async">
+										  <mat-option value="{{z.id}}">{{z.tipo}} {{z.colonia}}, {{z.ciudad}}, {{z.estado}}</mat-option>
+									  </ng-container>
+								  </mat-select>
+								  <mat-error *ngIf="f.zipID.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+							  </mat-form-field>
+							  <small class="form-text text-muted">Este campo se llena al validar el C.P.</small>
+						  </div>
+					  </div>
+					  <hr />
+					  <h4 class="mt-3 mb-3">Datos de contacto</h4>
+					  <div class="form-group row">
+						  <label for="example-search-input" class="col-sm-2 col-form-label">Persona</label>
+						  <div class="col-sm-10">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="" formControlName="contacto">
+							  </mat-form-field>
+							  <small class="form-text text-muted">Nombre de la persona con quien se tiene contacto (si existe).</small>
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="example-search-input" class="col-sm-2 col-form-label">Teléfono *</label>
+						  <div class="col-sm-4">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="10 dígitos" formControlName="telefono">
+								  <mat-error *ngIf="f.telefono.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+								  <mat-error *ngIf="(f.telefono.errors?.maxlength || f.telefono.errors?.minlength)" class="error-message">Este campo sólo puede tener 10 caracteres.</mat-error>
+							  </mat-form-field>
+						  </div>
+						  <label for="example-search-input" class="col-sm-2 col-form-label">Móvil</label>
+						  <div class="col-sm-4">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="10 dígitos" formControlName="movil">
+								  <mat-error *ngIf="(f.movil.errors?.maxlength || f.movil.errors?.minlength)" class="error-message">Este campo sólo puede tener 10 caracteres.</mat-error>
+							  </mat-form-field>
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="example-search-input" class="col-sm-2 col-form-label">Email *</label>
+						  <div class="col-sm-4">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="" formControlName="mail">
+								  <mat-error *ngIf="f.mail.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+								  <mat-error *ngIf="f.mail.errors?.email" class="error-message">Correo electrónico inválido.</mat-error>
+							  </mat-form-field>
+						  </div>
+						  <label for="example-search-input" class="col-sm-2 col-form-label">Sitio web</label>
+						  <div class="col-sm-4">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="" formControlName="web">
+							  </mat-form-field>
+						  </div>
+					  </div>
+					  <hr class="my-5" />
+					  <h4 class="mt-3 mb-3">Datos complementarios</h4>
+					  <div class="form-group row">
+						  <label for="example-search-input" class="col-sm-3 col-form-label">Crédito que otorga</label>
+						  <div class="col-sm-3">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="" formControlName="credito">
+							  </mat-form-field>
+							  <small id="emailHelp" class="form-text text-muted">Tiempo en días.</small>
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="example-search-input" class="col-sm-3 col-form-label">Cuenta contable</label>
+						  <div class="col-sm-6">
+							  <mat-form-field>
+								  <input   type="text" matInput placeholder="" formControlName="cuentaContable">
+							  </mat-form-field>
+							  <small id="emailHelp" class="form-text text-muted">Puede quedar en blanco.</small>
+						  </div>
+					  </div>
+					  <div class="form-group row">
+						  <label for="example-search-input" class="col-sm-2 col-form-label">Comentarios</label>
+						  <div class="col-sm-10">
+							  <mat-form-field>
+								  <textarea   matInput formControlName="comentarios" rows="3" placeholder="Comentarios, notas y observaciones"></textarea>
+							  </mat-form-field>
+						  </div>
+					  </div>
+			<hr class="my-5" />
+			<div class="form-group row">
+			  <div class="col-md-6">
+				<div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+			  </div>
+			  <div class="col-md-2">
+				<button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+			  </div>
+			  <div class="col-md-2">	
+				<button mat-raised-button (click)="resetForm()">Vaciar <mat-icon>delete_sweep</mat-icon></button>
+			  </div>
+			  <div class="col-md-2">	
+				<button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+			   </div>
+			</div>
+		  </form>
+		</div>
+	  </div>
+	</div>
+</div>

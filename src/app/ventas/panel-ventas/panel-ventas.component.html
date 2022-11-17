@@ -1,0 +1,168 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Ventas</h2>
+              </div>
+          </div>
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Ventas</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+<!--section start-->
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <app-cart-widget></app-cart-widget>
+            <hr>
+            <app-subcart-widget></app-subcart-widget>
+        </div>
+        <div class="col-md-9">
+            <div class="dashboard-right">
+                <div class="dashboard">
+                    <div class="page-title">
+                        <div class="welcome-msg">
+                            <h2>Panel de control Ventas</h2>
+                        </div>
+                    </div>
+                    <section class="collection section-b-space">
+                        <div class="container">
+                            <div class="row partition-collection">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/elementos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Elementos de menú</h3>
+                                            <p>Platillos, recetas y subrecetas</p>
+                                            <a [routerLink]="'/hawk/ventas/elementos-de-menu'" class="btn btn-outline">Entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/recetas.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Recetas</h3>
+                                            <p>Recetas y subrecetas</p>
+                                            <a [routerLink]="'/hawk/ventas/recetas'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/pos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Interfaz POS</h3>
+                                            <p>Interfaz con su punto de venta</p>
+                                            <a [routerLink]="'/hawk/ventas/interfaz-pos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/banquetes.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Paquetes</h3>
+                                            <p>Paquetes para banquetes</p>
+                                            <a [routerLink]="'/hawk/ventas/paquetes'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row partition-collection section-t-space">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/eventos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Eventos</h3>
+                                            <p>Dependientes de categorías</p>
+                                            <a [routerLink]="'/hawk/ventas/eventos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/pedidos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Pedidos</h3>
+                                            <p>Administración de pedidos</p>
+                                            <a [routerLink]="'/hawk/ventas/pedidos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/clientes.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Clientes</h3>
+                                            <p>Para banquetes y eventos</p>
+                                            <a [routerLink]="'/hawk/ventas/clientes'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/localidades.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Localidades</h3>
+                                            <p>Para banquetes y eventos</p>
+                                            <a [routerLink]="'/hawk/ventas/localidades'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row partition-collection section-t-space">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/personal.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Personal</h3>
+                                            <p>Para banquetes y eventos</p>
+                                            <a [routerLink]="'/hawk/ventas/personal'" class="btn btn-outline">Entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/cat-personal.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Categorías</h3>
+                                            <p>De personal</p>
+                                            <a [routerLink]="'/hawk/ventas/categorias-personal'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/ventas/tiempos.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Tiempos</h3>
+                                            <p>Para banquetes</p>
+                                            <a [routerLink]="'/hawk/ventas/tiempos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    
+                                </div>  
+                            </div>
+                        </div>
+                    </section>
+                    <!--Section ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

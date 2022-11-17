@@ -1,0 +1,102 @@
+<!-- Loader -->
+<div class="container" *ngIf="working">
+  <app-spinner></app-spinner>
+</div>
+<!-- Termina Loader -->
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Agregar artículo</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos'">Catálogos</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/catalogos/centros-de-consumo'">Centros de consumo</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Locaciones relacionadas</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End -->
+
+<div class="col-md-12">
+  <!-- ======== Workspace ======== -->	
+  <div class="dashboard-right">
+      <div class="dashboard">
+          <div class="row">
+              <div class="col-lg-10">
+                  <div class="page-title">
+                      <div class="welcome-msg">
+                          <h3 class="text-left">Centro de consumo: {{centro.Nombre}}</h3>
+                          <h4 class="text-left">Locaciones/Almacenes relacionados con este Centro</h4>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <span class="text-right"><img src="assets/images/pages/consumo.png" class="img-fluid" alt=""></span>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="search-div">
+                      <button mat-raised-button (click)="onCreate()" color="primary">
+                          Nuevo <mat-icon>add</mat-icon>
+                      </button>
+                      <mat-form-field class="search-form-field" floatLabel="never">
+                          <input matInput [(ngModel)]="searchKey" placeholder="Búsqueda" autocomplete="off" (keyup)="applyFliter()">
+                          <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()"><mat-icon>close</mat-icon></button>
+                      </mat-form-field>
+                  </div>
+                  <div class="mat-elevation-z8">
+                    <mat-table [dataSource]="listData" matSort>
+                      <ng-container matColumnDef="LocacionID">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                          <mat-cell *matCellDef="let element">{{element.LocacionID}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="Nombre">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                          <mat-cell *matCellDef="let element">{{element.NALocacion.Nombre}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="Almacen">
+                          <mat-header-cell *matHeaderCellDef mat-sort-header>Almacén</mat-header-cell>
+                          <mat-cell *matCellDef="let element">{{element.NALocacion.NAAlmacen.Nombre}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="acciones">
+                          <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                          <mat-cell *matCellDef="let row">
+                              <button mat-icon-button (click)="onDetail(row)"><mat-icon>details</mat-icon></button>
+                              <button mat-icon-button color="warn" (click)="onUnlink(row)"><mat-icon>link_off</mat-icon></button>
+                          </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="loading">
+                          <mat-footer-cell *matFooterCellDef colspan="6">
+                              Cargando
+                          </mat-footer-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="noData">
+                          <mat-footer-cell *matFooterCellDef colspan="6">
+                              No hay locaciones ligadas a este artículo
+                          </mat-footer-cell>
+                      </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+                        <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+                        <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+                      </mat-table>
+                      <mat-paginator [pageSizeOptions]="[15, 25, 30, 50]" [pageSize]="25" showFirstLastButtons></mat-paginator>
+                  </div>
+                </div>
+      </div>
+  </div>
+  <!-- ======== /Workspace ======== -->
+</div>

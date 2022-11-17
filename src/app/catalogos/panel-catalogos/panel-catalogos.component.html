@@ -1,0 +1,137 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Catálogos</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'hawk'">Inicio</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Catálogos</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<!--section start-->
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <app-cart-widget></app-cart-widget>
+            <hr>
+            <app-subcart-widget></app-subcart-widget>
+        </div>
+        <div class="col-md-9">
+            <div class="dashboard-right">
+                <div class="dashboard">
+                    <div class="page-title">
+                        <div class="welcome-msg">
+                            <h2>Catálogos disponibles</h2>
+                        </div>
+                    </div>
+                    <section class="collection section-b-space">
+                        <div class="container">
+                            <div class="row partition-collection">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/almacenes'">
+                                        <img src="assets/images/catalogos/almacenes.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Almacenes</h3>
+                                            <p>Almacenes y locaciones</p>
+                                            <a [routerLink]="'/hawk/catalogos/almacenes'" class="btn btn-outline">Entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/proveedores'">
+                                        <img src="assets/images/catalogos/proveedores.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Proveedores</h3>
+                                            <p>Administre a sus proveedores</p>
+                                            <a [routerLink]="'/hawk/catalogos/proveedores'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/conceptos'">
+                                        <img src="assets/images/catalogos/conceptos.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Conceptos</h3>
+                                            <p>Catálogo de conceptos</p>
+                                            <a [routerLink]="'/hawk/catalogos/conceptos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/centros-de-consumo'">
+                                        <img src="assets/images/catalogos/consumo.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Centros de Consumo</h3>
+                                            <p>Centros de consumo</p>
+                                            <a [routerLink]="'/hawk/catalogos/centros-de-consumo'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row partition-collection section-t-space">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/articulos/maestro'">
+                                        <img src="assets/images/catalogos/subcategorias.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Maestro</h3>
+                                            <p>Catálogo maestro de artículos</p>
+                                            <a [routerLink]="'/hawk/catalogos/articulos/maestro'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/articulos'">
+                                        <img src="assets/images/catalogos/articulos.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Artículos</h3>
+                                            <p>Artículos inventariables</p>
+                                            <a [routerLink]="'/hawk/catalogos/articulos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/articulos/interfaz'">
+                                        <img src="assets/images/catalogos/categorias.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Interfaz</h3>
+                                            <p>Convertir artículos al catálogo maestro</p>
+                                            <a [routerLink]="'/hawk/catalogos/articulos/interfaz'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--Section ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

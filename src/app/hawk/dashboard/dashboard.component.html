@@ -1,0 +1,132 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Panel de control</h2>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'hawk'">Inicio</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Panel de control</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb End -->
+<!--section start-->
+<br><br>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <app-cart-widget></app-cart-widget>
+            <hr>
+            <app-subcart-widget></app-subcart-widget>
+        </div>
+        <div class="col-md-9">
+            <div class="dashboard-right">
+                <div class="dashboard">
+                    <div class="page-title">
+                        <div class="welcome-msg">
+                            <h2>Catálogos disponibles</h2>
+                        </div>
+                    </div>
+                    <section class="collection section-b-space">
+                        <div class="container">
+                            <div class="row partition-collection">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos'">
+                                        <img src="assets/images/dashboard/catalogos.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Catálogos</h3>
+                                            <p>Altas, bajas, cambios y consultas</p>
+                                            <a [routerLink]="'/hawk/catalogos'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/inventarios'">
+                                        <img src="assets/images/dashboard/inventarios.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Inventarios</h3>
+                                            <p>Movimientos, conteos y mermas</p>
+                                            <a [routerLink]="'/hawk/inventarios'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/catalogos/proveedores'">
+                                        <img src="assets/images/dashboard/ventas.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Ventas</h3>
+                                            <p>Recetas, subrecetas y reportes</p>
+                                            <a [routerLink]="'/hawk/catalogos/proveedores'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/hawk/inventarios/compras'">
+                                        <img src="assets/images/dashboard/compras.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Compras</h3>
+                                            <p>Órdenes, ingresos y facturas</p>
+                                            <a [routerLink]="'/hawk/inventarios/compras'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row partition-collection section-t-space">
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/dashboard/reportes.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Reportes</h3>
+                                            <p>Generación avanzada de reportes</p>
+                                            <a [routerLink]="" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <a [routerLink]="'/sistema'">
+                                            <img src="assets/images/dashboard/sistema.png" class="img-fluid" alt="">
+                                        </a>
+                                        <div>
+                                            <h3 class="text-primary">Sistema</h3>
+                                            <p>Configuraciones y permisos</p>
+                                            <a [routerLink]="'/sistema'" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6">
+                                    <div class="collection-block">
+                                        <img src="assets/images/dashboard/perfil.png" class="img-fluid" alt="">
+                                        <div>
+                                            <h3 class="text-primary">Perfil</h3>
+                                            <p>Administre su perfil de usuario</p>
+                                            <a [routerLink]="" class="btn btn-outline">entrar</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!--Section ends-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+ID,Descripcion,Activo,Telefono,Celular,CorreoElectronico,Notas,TotalCompras,TotalPagos,RazonSocial,RFC,CURP,Contacto,Direccion1,Direccion2,DelegacionMunicipio,Ciudad,Estado,Telefonos,PaginaWeb,DiasCredito,uaFecha,uaUsuario,crFecha,crUsuario,Fax,CP,CuentaContable,keywords,zip_id
+001,Abasto Basico S.A. de C.V.,-1,,,,,,,Abasto Basico S.A. de C.V.,ABA860521,,,,,,Iztapalapa,CDMX,,,15,11/6/18,Armando,11/6/18,Armando,,,,,
+002,Fruvers,-1,,,,,,,,,,,,,,,,,,15,4/26/19,Armando,4/26/19,Armando,,,,,
+003,Coca Cola,-1,,,,,,,,,,,,,,,,,,15,5/14/19,Armando,5/14/19,Armando,,,,,
+004,CFE,-1,,,,,,,,,,,,,,,,,,15,4/16/19,Armando,4/16/19,Armando,,,,,
+999,Sin proveedor,-1,,,,,,,Sin Proveedor,,,,,,,,,,,15,11/2/18,Armando,11/2/18,Armando,,,,,

@@ -1,0 +1,78 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-title">
+                    <h2>Elija un almacén y una locación</h2>
+                </div>
+            </div> 
+            <div class="col-sm-6">
+                <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                        <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios'">Inventarios</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Locaciones por almacén</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+  </div>
+  <br><br>
+  <!-- breadcrumb End -->
+<div class="container-fluid">
+  <div class="col-md-12">
+    <div class="dashboard-right selection-b-space">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+          <div class="form-group row">
+            <div class="col-lg-10">&nbsp;</div>  
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/almacenes.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Almacén</label>
+            <div class="col-sm-5">
+              <mat-form-field>
+                <mat-label>Seleccione una opción</mat-label>
+                <mat-select formControlName="almacen" (selectionChange)="updateDrop('locaciones', f.almacen.value)" [(ngModel)]="currentAlmacen">
+                  <ng-container *ngFor="let a of almacenes">
+                    <mat-option value="{{a.ID}}">{{a.Descripcion}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <mat-error *ngIf="f.almacen.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Locacion</label>
+            <div class="col-sm-5">
+              <mat-form-field>
+                <mat-label>Seleccione una opción</mat-label>
+                <mat-select formControlName="locacion" [(ngModel)]="currentLocacion">
+                  <ng-container *ngFor="let l of locaciones$ | async">
+                    <mat-option value="{{l.Descripcion}}">{{l.Descripcion}}</mat-option>
+                  </ng-container>
+                </mat-select>
+                <mat-error *ngIf="f.locacion.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Este campo se llena al seleccionar almacén</small>
+            </div>
+          </div>  
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-10">
+              &nbsp;
+            </div>
+            <div class="col-md-2">	
+              <button mat-raised-button (click)="selectLocacion()" color="primary">Elegir <mat-icon>done</mat-icon></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

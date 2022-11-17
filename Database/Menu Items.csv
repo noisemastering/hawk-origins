@@ -1,0 +1,10 @@
+ID,Descripcion,Tag,Precio,ID_Centro1,ID_Centro2,ID_Centro3,ID_Centro4,ID_Centro5,Categoria,ListaOpciones,MostrarOpciones,Status,Secuencia,SaltarLineaDespues,ID_Articulo,Costo,Cantidad_Articulo,UM,EsPorcion,ExistenciasPorciones,NumeroPorcionesXItem,ExistenciasItem,ElaborarAutomaticamente,MostradoEnCarta,ID_PuntoVenta,ID_PorcionDe,ID_UMRendimientoLote,RendimientoLote,ConsumoPorcion,RendimientoXPieza,PUtilidad,PrecioCalculado,EsModNegativo
+10101,Aguacate Relleno,1 Orden,MX$70.00,,,,,,Sub Recetas,,0,A,0,0,,15.2517,,,0,0,0,0,-1,-1,10101,,Pza,1,,0,0,0,0
+10102,Espagueti a la bolognesa,1 orden,MX$45.00,,,,,,Sub Recetas,,0,A,0,0,,21.0160535117057,,,0,0,0,0,-1,0,10102,,Pza,1,,0,0,0,0
+10202,Carne asada con frijoles,1 Orden,MX$120.00,,,,,,Sub Recetas,,0,A,0,0,,16.216667,,,0,0,0,0,-1,0,10202,,Pza,1,,0,0,0,0
+10401,Rebanada de Flan,1 Orden,MX$45.00,,,,,,Sub Recetas,,0,A,1,0,,6.16666666666667,,,0,,,0,-1,-1,10401,,Pza,1,,0,,,
+SR001,Sub Flan Napolitano,12 Rebanadas,MX$0.00,,,,,,Sub Recetas,,0,A,3,0,,74,,,0,,,0,-1,0,,,Pza,12,,0,,,
+SR003,Sub. Atun con Mayonesa,1.5 Kg,MX$0.00,,,,,,Sub Recetas,,0,A,2,0,,42.517,,,0,,,0,-1,0,,,Kg,1.5,,0,,,
+SR004,Sub. Aguacate Relleno,10 Pza,MX$0.00,,,,,,Sub Recetas,,0,A,0,0,,76.2585,,,0,,,0,-1,0,,,Pza,10,,0,,,
+SR008,Sub Frijoles Refritos,4 Kg,MX$0.00,,,,,,Sub Recetas,,0,A,7,0,,40,,,0,,,0,-1,0,,,Kg,4,,0,,,
+SR010,Sub Arroz Blanco,5 Kg,MX$0.00,,,,,,Sub Recetas,,0,A,8,0,,85.83335,,,0,,,0,-1,0,,,Kg,5,,0,,,

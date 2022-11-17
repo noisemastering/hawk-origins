@@ -1,0 +1,196 @@
+<div class="container-fluid" *ngIf="working"> 
+    <app-spinner></app-spinner>
+  </div>
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br><br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+          <div class="form-group row">
+            <div class="col-lg-10">&nbsp;</div>  
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/clientes.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>	
+          <hr>
+					<div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre *</label>	
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input type="text" placeholder="Nombre del cliente" matInput formControlName="descripcion" (blur)="duplicate('nombre')">
+                <mat-error *ngIf="f.descripcion.errors?.required">Este campo es requerido.</mat-error>
+                <mat-error *ngIf="f.descripcion.errors?.minlength">Este campo debe terner al menos 4 caracteres.</mat-error>
+                <mat-error *ngIf="f.descripcion.errors?.duplicate">Este cliente ya existe.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Identifique al cliente con un nombre.</small>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Dirección 1 *</label>	
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input type="text" placeholder="Dirección 1" matInput formControlName="direccion1">
+                <mat-error *ngIf="f.direccion1.errors?.required">Debe especificar al menos una dirección.</mat-error>
+                <mat-error *ngIf="f.direccion1.errors?.minlength">Este campo debe terner al menos 6 caracteres.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Indique una dirección para este cliente.</small>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Dirección 2</label>	
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input type="text" placeholder="Dirección 2" matInput formControlName="direccion2">
+                <mat-error *ngIf="f.direccion2.errors?.minlength">Este campo debe terner al menos 6 caracteres.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Indique una segunda dirección para este cliente (opcional).</small>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Dirección 3</label>	
+            <div class="col-lg-5">
+              <mat-form-field>
+                <input type="text" placeholder="Dirección 3" matInput formControlName="direccion3">
+                <mat-error *ngIf="f.direccion3.errors?.minlength">Este campo debe terner al menos 6 caracteres.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Indique una tercera dirección para este cliente (opcional).</small>
+            </div>
+            <div class="col-lg-5">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Teléfonos</label>	
+            <div class="col-lg-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="telefonos">
+                <!--<mat-error *ngIf="f.telefonos?.minLength">Este campo debe terner 10 caracteres.</mat-error>
+                <mat-error *ngIf="f.telefonos?.maxLength">Este campo debe terner 10 caracteres.</mat-error>-->
+              </mat-form-field>
+              <small class="form-text text-muted">Teléfono del cliente.</small>
+            </div>
+            <label class="col-sm-2 col-form-label">Código Postal</label>	
+            <div class="col-lg-2">
+              <mat-form-field>
+                <input type="text" matInput formControlName="cp">
+                <mat-error *ngIf="f.cp.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                <!--<mat-error *ngIf="f.cp.minlength">Este campo debe terner 5 caracteres.</mat-error>
+                <mat-error *ngIf="f.cp.duplicate">Este campo debe terner 5 caracteres.</mat-error>-->
+              </mat-form-field>
+              <small class="form-text text-muted">Código postal del cliente.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Ciudad</label>	
+            <div class="col-lg-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="ciudad">
+                <mat-error *ngIf="f.ciudad.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                <!--<mat-error *ngIf="f.ciudad?.minlength">Este campo debe terner 4 caracteres.</mat-error>
+                <mat-error *ngIf="f.ciudad?.duplicate">Este campo debe terner 24 caracteres.</mat-error>-->
+              </mat-form-field>
+              <small class="form-text text-muted">Ciudad del cliente.</small>
+            </div>
+            <label class="col-sm-2 col-form-label">Estado</label>	
+            <div class="col-lg-2">
+              <mat-form-field>
+                <input type="text" matInput formControlName="estado">
+                <mat-error *ngIf="f.estado.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                <!--<mat-error *ngIf="f.estado?.minlength">Este campo debe terner 4 caracteres.</mat-error>
+                <mat-error *ngIf="f.estado?.duplicate">Este campo debe terner 24 caracteres.</mat-error>-->
+              </mat-form-field>
+              <small class="form-text text-muted">Estadp del cliente.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Delegación/Municipio</label>	
+            <div class="col-lg-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="delegacionMunicipio">
+                <mat-error *ngIf="f.delegacionMunicipio.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                <!--<mat-error *ngIf="f.delegacionMunicipio.minlength">Este campo debe terner 4 caracteres.</mat-error>
+                <mat-error *ngIf="f.delegacionMunicipio.duplicate">Este campo debe terner 24 caracteres.</mat-error>-->
+              </mat-form-field>
+              <small class="form-text text-muted">Ciudad del cliente.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Turno</label>
+            <div class="col-lg-4">
+                <mat-radio-group formControlName="turno" aria-label="Select an option" [(ngModel)]="currentShift">
+                    <mat-radio-button value="M" color="primary">Matutino</mat-radio-button>
+                    <mat-radio-button value="V" color="primary">Vespertino</mat-radio-button>
+                </mat-radio-group>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Notas *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+                <mat-error *ngIf="f.notas.errors?.maxlength" class="error-message">Este campo no debe exceder los 160 caracteres.</mat-error>
+                <mat-error *ngIf="f.notas.errors?.minlength" class="error-message">Este campo debe terner al menos 10 caracteres.</mat-error>
+              </mat-form-field>
+              <small class="form-text text-muted">Breve reseña del tipo de productos que maneja esta categoría.</small>
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Palabras clave *</label>
+            <div class="col-sm-10">
+              <mat-form-field class="demo-chip-list">
+                <mat-chip-list #chipListKW>
+                  <mat-chip *ngFor="let keyword of keywords" 
+                      [selectable]="selectable"
+                      [removable]="removable" 
+                      (removed)="remove(keyword)">
+                    {{keyword}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input placeholder="Keywords"
+                      #keysInput
+                      formControlName="keys"  
+                      [matChipInputFor]="chipListKW"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)"
+                      [matAutocomplete]="autoKW" />
+                </mat-chip-list>
+                <mat-autocomplete #autoKW="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let key of keyws" [value]="key.Name">
+                    {{ key.Name }} 
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+              <small class="form-text text-muted">Escriba palabras clave separadas por una coma</small>			
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>          
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-6">
+              <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button (click)="resetForm()" color="primary">Limpiar <mat-icon>delete_sweep</mat-icon></button>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+              <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

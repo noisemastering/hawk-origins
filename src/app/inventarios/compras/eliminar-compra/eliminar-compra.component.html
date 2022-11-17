@@ -1,0 +1,106 @@
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Agregar compra</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios'">Inventarios</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios/compras'">Compras</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Agregar compra</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End --> 
+<br><br>
+<form [formGroup]='theForm' class="normal-form">
+    <div class="container-fluid">
+        <div class="col-md-12">
+          <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                    <div class="col-lg-10"><h4>Detalle de la compra</h4></div>  
+                    <div class="col-lg-2">
+                        <span class="text-right"><img src="assets/images/pages/consumo.png" class="img-fluid" alt=""></span>  
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Proveedor</label>	
+                  <div class="col-sm-3">
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="proveedor" readonly>
+                    </mat-form-field>
+                  </div>
+                    <label class="col-sm-1 col-form-label">&nbsp;</label>	
+                  <label class="col-sm-2 col-form-label">Razón social</label>	
+                  <div class="col-sm-2">
+                    <mat-form-field>
+                      <input type="text" matInput formControlName="razonsocial" readonly>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Estatus</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                          <input type="text" matInput formControlName="estatus" readonly>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <label class="col-sm-1 col-form-label">No. de factura</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <input type="text" placeholder="factura" matInput formControlName="factura">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-1"></div>
+                    <label class="col-sm-1 col-form-label" >Fecha de factura</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fechaFactura">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Descripción *</label>	
+                  <div class="col-lg-8">
+                    <mat-form-field>
+                      <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Datos descriptivos del centro de consumo.</small>
+                  </div>
+                  <div class="col-sm-2">&nbsp;</div>
+                </div>
+                <hr class="my-5" />
+                <div class="form-group row">
+                  <div class="col-md-10"*ngIf="!delete">
+                    <div class="alert alert-danger"><mat-icon>pan_tool</mat-icon> No es posible borrar esta compra ya que existen {{articulos}} artículos asociados a ella.</div>
+                  </div>
+                  <div class="col-md-8"*ngIf="delete">
+                    &nbsp;
+                  </div>
+                  <div class="col-md-2"*ngIf="delete">
+                    <button mat-raised-button (click)="onDelete()" color="warn">Eliminar <mat-icon>delete</mat-icon></button>
+                  </div>
+                  <div class="col-md-2">	
+                    <button mat-raised-button (click)="onClose()" color="primary">Cancelar <mat-icon>clear</mat-icon></button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>

@@ -1,0 +1,6 @@
+ID,Color,Secuencia,NumColumnas,ID_Termino,ID_SinExtra,ListaExcepcionesTermino,ListaOpciones,MostrarOpciones,ListaCentrosExclusion,Tipo
+Alimentos,,1,0,,,,,,,ALIM
+Cortes,,5,0,,,,,,,ALIM
+Plato Fuerte,,0,0,,,,,,,ALIM
+Postres,,2,0,,,,,,,ALIM
+Sub Recetas,,0,0,,,,,,,ALIM

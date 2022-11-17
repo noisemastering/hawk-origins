@@ -1,0 +1,198 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br><br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+			<div class="form-group row">
+				<div class="col-lg-10">&nbsp;</div>  
+				<div class="col-lg-2">
+					<span class="text-right"><img src="assets/images/pages/proveedores.png" class="img-fluid" alt=""></span>  
+				</div>
+			</div>	
+			<hr>
+			<h4>Datos Generales</h4>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">ID</label>	
+				<div class="col-lg-8"> 
+					<mat-form-field>
+						<input type="text" matInput formControlName="prov_id" readonly>
+					</mat-form-field>
+					<small class="form-text text-muted">Clave de identificación.</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Razón Social *</label>	
+				<div class="col-lg-8"> 
+					<mat-form-field>
+						<input type="text" placeholder="Sin datos" matInput formControlName="razon" readonly>
+					</mat-form-field>
+					<small class="form-text text-muted">Tal como aparece en su registro del SAT.</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Descripción *</label>	
+				<div class="col-lg-8">
+					<mat-form-field>
+						<textarea matInput placeholder="Sin datos" formControlName="descripcion" rows="3" readonly>{{proveedor.Descripcion}}</textarea>
+					</mat-form-field>
+					<small class="form-text text-muted">Breve reseña del tipo de productos que maneja este proveedor.</small>
+				</div>
+				<div class="col-sm-2">&nbsp;</div>
+			</div>
+			<hr />
+			<h4 class="mt-3 mb-3">Datos fiscales</h4>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">RFC *</label>
+				<div class="col-sm-4">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="rfc" readonly>
+					</mat-form-field>
+					<small class="form-text text-muted">12 caracteres para persona moral o 13 para persona física.</small>
+				</div>
+				<label class="col-sm-2 col-form-label">CURP</label>
+				<div class="col-sm-4">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="curp" readonly>
+					</mat-form-field>
+					<small class="form-text text-muted">18 caracteres.</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">Dom. Fiscal *</label>
+				<div class="col-sm-10">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="calle" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label class="col-sm-2 col-form-label">C. P. </label>
+				<div class="col-sm-2">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="cp" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<hr />
+			<h4 class="mt-3 mb-3">Datos de contacto</h4>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-2 col-form-label">Persona</label>
+				<div class="col-sm-10">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="contacto" readonly>
+					</mat-form-field>
+					<small class="form-text text-muted">Nombre de la persona con quien se tiene contacto (si existe).</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-2 col-form-label">Teléfono *</label>
+				<div class="col-sm-4">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="telefono" readonly>
+					</mat-form-field>
+				</div>
+				<label for="example-search-input" class="col-sm-2 col-form-label">Móvil</label>
+				<div class="col-sm-4">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="movil" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-2 col-form-label">Email *</label>
+				<div class="col-sm-4">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="mail" readonly>
+					</mat-form-field>
+				</div>
+				<label for="example-search-input" class="col-sm-2 col-form-label">Sitio web</label>
+				<div class="col-sm-4">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="web" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<hr class="my-5" />
+			<h4 class="mt-3 mb-3">Datos complementarios</h4>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-3 col-form-label">Crédito que otorga</label>
+				<div class="col-sm-3">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="credito" readonly>
+					</mat-form-field>
+					<small id="emailHelp" class="form-text text-muted">Tiempo en días.</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-3 col-form-label">Cuenta contable</label>
+				<div class="col-sm-6">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="cuentaContable" readonly>
+					</mat-form-field>
+					<small class="form-text text-muted">Puede quedar en blanco.</small>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-2 col-form-label">Comentarios</label>
+				<div class="col-sm-10">
+					<mat-form-field>
+						<textarea readonly formControlName="comentarios" placeholder="Sin datos" matInput rows="3">{{proveedor.Notas}}</textarea>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-3 col-form-label">Fecha de creación</label>
+				<div class="col-sm-6">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="fechaCreacion" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-3 col-form-label">Usuario que lo creó</label>
+				<div class="col-sm-6">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="usuarioCreacion" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-3 col-form-label">Última modficación</label>
+				<div class="col-sm-6">
+					<mat-form-field>
+						<input type="text" matInput placeholder="Sin datos" formControlName="ultimaModificacion" readonly>
+					</mat-form-field>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="example-search-input" class="col-sm-3 col-form-label">Usuario que modificó</label>
+				<div class="col-sm-6">
+				<mat-form-field>
+					<input type="text" matInput placeholder="Sin datos" formControlName="usuarioModificacion" readonly>
+				</mat-form-field>
+				</div>
+			</div>
+			<hr class="my-5" />
+			<div class="form-group row">
+				<div class="col-md-6">
+					&nbsp;
+				</div>
+				<div class="col-md-3">
+					&nbsp;
+				</div>
+				<div class="col-md-3">	
+					<button mat-raised-button color="primary" (click)="onClose()">OK <mat-icon>done</mat-icon></button>
+				</div>
+			</div>  
+		</form>
+      </div>
+    </div>
+  </div>
+</div>

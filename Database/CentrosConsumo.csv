@@ -1,0 +1,8 @@
+ID,ID_PuntoVenta,Descripcion,Localizacion,Impresora,FontName,FontSize,Notas,FooterNumLines,HeaderNumLines,OrdenarXItem,NumCopias,FontBold,ID_Almacen,Locacion,uaFecha,uaUsuario,crFecha,crUsuario,ID_AlmacenAlt,LocacionAlt
+1,1,barra ,NULL,NULL,NULL,NULL,,NULL,NULL,NULL,NULL,NULL,400,Refrigerador Cervezas,43:12.5,nodefinido,43:12.5,nodefinido,NULL,NULL
+100,100,fuente de sodas,NULL,NULL,NULL,NULL,,NULL,NULL,NULL,NULL,NULL,FS01,refrigerador,10:22.7,Admin,43:15.5,Admin,NULL,NULL
+AlexPrueba,34,Pruebitas multiples almacenes,NULL,NULL,NULL,NULL,,NULL,NULL,NULL,NULL,NULL,1000,General,10:33.6,Admin,36:37.0,Admin,1000,barra
+BAR,17,Bar,Onde está la banda,ECPrinter1,Arial,8,,0,0,0,1,1,1000,General,56:46.6,Admin,NULL,NULL,1000,barra
+cafe,1,cafe,NULL,NULL,NULL,NULL,,NULL,NULL,NULL,NULL,NULL,1,general,57:16.5,nodefinido,26:07.9,Admin,FS01,barra 1
+CAJA,2,Caja,Cerca de la registradora,ECPrinter1,Courier New,8,,0,0,0,1,1,1000,Camara de conservacion,36:10.8,Admin,NULL,NULL,NULL,NULL
+fernando,0,vendedor fernando,NULL,NULL,NULL,NULL,,NULL,NULL,NULL,NULL,NULL,1000,General,00:28.6,Admin,00:28.6,Admin,NULL,NULL

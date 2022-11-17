@@ -1,0 +1,286 @@
+<!-- Loader -->
+<div class="container" *ngIf="working">
+  <app-spinner></app-spinner>
+</div>
+<!-- Termina Loader -->
+
+<!-- breadcrumb start -->
+<div class="breadcrumb-section">
+  <div class="container">
+      <div class="row">
+          <div class="col-sm-6">
+              <div class="page-title">
+                  <h2>Agregar compra</h2>
+              </div>
+          </div> 
+          <div class="col-sm-6">
+              <nav aria-label="breadcrumb" class="theme-breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk'">Inicio</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/dashboard'">Panel de control</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios'">Inventarios</a></li>
+                      <li class="breadcrumb-item"><a [routerLink]="'/hawk/inventarios/compras'">Compras</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Agregar compra</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
+<!-- breadcrumb End --> 
+<br><br>
+<form [formGroup]='theForm' class="normal-form">
+    <div class="container-fluid">
+        <div class="col-md-12">
+          <div class="dashboard-right">
+            <div class="dashboard">
+                <div class="form-group row">
+                    <div class="col-lg-10"><h4>Detalle de la compra</h4></div>  
+                    <div class="col-lg-2">
+                        <span class="text-right"><img src="assets/images/pages/consumo.png" class="img-fluid" alt=""></span>  
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Proveedor</label>	
+                  <div class="col-sm-3">
+                    <mat-form-field>
+                      <mat-label>Seleccione un proveedor</mat-label>
+                      <mat-select formControlName="proveedorSelect" (selectionChange)="updateRazones(this)">
+                        <ng-container *ngFor="let p of proveedores">
+                          <mat-option value="{{p.ProveedorID}}">{{p.Nombre}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error *ngIf="f.proveedorSelect.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Elija un proveedor para desplegar la lista de razones sociales</small>
+                  </div>
+                    <label class="col-sm-1 col-form-label">&nbsp;</label>	
+                  <label class="col-sm-2 col-form-label">Razón social</label>	
+                  <div class="col-sm-2">
+                    <mat-form-field>
+                      <mat-label>Seleccione una razón social</mat-label>
+                      <mat-select formControlName="razonsocialSelect">
+                        <ng-container *ngFor="let r of razones$">
+                          <mat-option value="{{r.RazonSocialID}}">{{r.RazonSocial}}</mat-option>
+                        </ng-container>
+                      </mat-select>
+                      <mat-error *ngIf="f.razonsocialSelect.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Elija una razón social</small>
+                  </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Estatus</label>	
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <mat-label>Seleccione una estado</mat-label>
+                            <mat-select formControlName="estatusSelect" (selectionChange)="changeStatus(this)">
+                            <ng-container *ngFor="let e of estados">
+                                <mat-option value="{{e.ID}}">{{e.Desc}}</mat-option>
+                            </ng-container>
+                            </mat-select>
+                            <mat-error *ngIf="f.estatusSelect.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Elija una estatus</small>
+                    </div>
+                    <div class="col-lg-1" *ngIf='estatus==2'></div>
+                    <label class="col-sm-1 col-form-label" *ngIf='estatus==2'>No. de factura</label>	
+                    <div class="col-lg-2" *ngIf='estatus==2'>
+                        <mat-form-field>
+                            <input type="text" placeholder="factura" matInput formControlName="factura">
+                        </mat-form-field>
+                        <small class="form-text text-muted">Número o clave del documento.</small>
+                    </div>
+                    <div class="col-lg-1" *ngIf='estatus==2'></div>
+                    <label class="col-sm-1 col-form-label" *ngIf='estatus==2'>Fecha de factura</label>	
+                    <div class="col-lg-2" *ngIf='estatus==2'>
+                        <mat-form-field>
+                            <mat-label>Choose a date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="fechaFactura">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <small class="form-text text-muted">Fecha del documento.</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label">Descripción *</label>	
+                  <div class="col-lg-8">
+                    <mat-form-field>
+                      <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..."></textarea>
+                      <mat-error *ngIf="f.notas.errors?.required" class="error-message">Este campo es requerido.</mat-error>
+                      <mat-error *ngIf="f.notas.errors?.maxlength" class="error-message">Este campo no debe exceder los 160 caracteres.</mat-error>
+                      <mat-error *ngIf="f.notas.errors?.minlength" class="error-message">Este campo debe terner al menos 10 caracteres.</mat-error>
+                    </mat-form-field>
+                    <small class="form-text text-muted">Datos descriptivos del centro de consumo.</small>
+                  </div>
+                  <div class="col-sm-2">&nbsp;</div>
+                </div>
+                <hr class="my-5" />
+                <div class="form-group-row">
+                  <div class="col-lg-12">
+                    <h3>Asignar toda la compra a un almacén</h3>
+                    <h4>Dejar en blanco si los artículos irán a diferentes almacenes</h4>
+                    <br><br>
+                    <h4 *ngIf="isDefault">Almacén default: {{almacenDefault}} - {{locacionDefault}} </h4>
+                  </div>
+                </div>
+                <br><br>
+                <div class="form-group row">
+                    <label class="col-sm-1 col-form-label">Almacén</label>	
+                    <div class="col-sm-3">
+                      <mat-form-field>
+                          <mat-label>Seleccione una opción</mat-label>
+                          <mat-select formControlName="almacenSelect" (selectionChange)="updateDrop(this)">
+                              <ng-container *ngFor="let a of almacenes">
+                                  <mat-option value="{{a.AlmacenID}}">{{a.Nombre}}</mat-option>
+                              </ng-container>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+                    <div class="col-lg-1">&nbsp;</div>
+                    <label class="col-sm-1 col-form-label">Locación</label>	
+                    <div class="col-sm-3">
+                      <mat-form-field>
+                          <mat-label>Seleccione una opción</mat-label>
+                          <mat-select formControlName="locacionSelect" (selectionChange)="updateLoc(this)">
+                              <ng-container *ngFor="let l of locaciones$">
+                                  <mat-option value="{{l.LocacionID}}">{{l.Nombre}}</mat-option>
+                              </ng-container>
+                          </mat-select>
+                      </mat-form-field>
+                  </div>
+                </div>
+                <hr class="my-5" />
+                <div class="form-group row">
+                    <div class="col-md-4">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Código de barras</label>	
+                        <div class="col-sm-4">
+                          <mat-form-field>
+                            <input type="text" placeholder="UPC" matInput formControlName="upc">
+                          </mat-form-field>
+                          <small class="form-text text-muted">Identificador del punto de venta.</small>
+                        </div>
+                        <div class="col-md-4">
+                          <button mat-raised-button (click)="searchItem(this)" color="primary">Buscar <mat-icon>search</mat-icon></button>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Si no cuenta con código de barras</label>	
+                        <div class="col-lg-9">
+                          <button mat-raised-button (click)="listItems(this)" color="primary">Seleccionar de lista <mat-icon>list</mat-icon></button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-group-row">
+                        <div class="col-md-6" *ngIf="encontrado"><h4>{{presentacion.Articulo.Nombre}}- {{presentacion.Nombre}}</h4></div>
+                        <div class="col-md-6" *ngIf="foundItemList"><h4>Artículo: {{articulo.Nombre}}</h4></div>
+                        <div class="col-lg-6" *ngIf="foundItemList">
+                          <mat-form-field>
+                            <mat-label>Seleccione una presentación</mat-label>
+                            <mat-select formControlName="presentacionSelect">
+                                <ng-container *ngFor="let p of presentaciones$">
+                                    <mat-option value="{{p.PresentacionID}}">{{p.Nombre}}</mat-option>
+                                </ng-container>
+                            </mat-select>
+                        </mat-form-field>
+                        </div>
+                        <label class="col-sm-2 col-form-label" *ngIf="encontrado || foundItemList">Cantidad</label>	
+                        <div class="col-md-2" *ngIf="encontrado || foundItemList">
+                            <mat-form-field>
+                                <input type="text" matInput formControlName="cantidad">
+                            </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="form-group-row">
+                        <label class="col-sm-2 col-form-label" *ngIf="encontrado || foundItemList">Costo $</label>	
+                        <div class="col-md-3" *ngIf="encontrado || foundItemList">
+                            <mat-form-field>
+                                <input type="text" matInput formControlName="costo">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3" *ngIf="encontrado || foundItemList">
+                            <button mat-raised-button (click)="addItem(this)" color="primary">Agregar <mat-icon>add</mat-icon></button>
+                        </div>
+                      </div>  
+                    </div>
+                </div>
+                <hr class="my-5" />
+                <div class="form-group row">
+                  <div class="col-lg-10"><h4>Artículos de la compra</h4></div>  
+                </div>
+                <div class="form-group row">
+                  <div class="col-lg-12">
+                    <div class="mat-elevation-z8">
+                      <mat-table [dataSource]="listData" matSort>
+                          <ng-container matColumnDef="FirebaseID">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Articulo.FirebaseID}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Nombre">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Articulo.Nombre}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Presentacion">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Presentacion</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Presentacion.Nombre}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Cantidad">
+                              <mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</mat-header-cell>
+                              <mat-cell *matCellDef="let element">{{element.Cantidad}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Costo">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header>Costo</mat-header-cell>
+                            <mat-cell *matCellDef="let element">$ {{element.Costo}}</mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Acciones">
+                              <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                              <mat-cell *matCellDef="let row">
+                                  <button mat-icon-button (click)="onDetail(row)"><mat-icon>details</mat-icon></button>
+                                  <button mat-icon-button (click)="onEdit(row)"><mat-icon>edit</mat-icon></button>
+                                  <button mat-icon-button color="warn" (click)="onDelete(row)"><mat-icon>delete_outline</mat-icon></button>
+                              </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="loading">
+                              <mat-footer-cell *matFooterCellDef colspan="6">
+                                  Cargando
+                              </mat-footer-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="noData">
+                              <mat-footer-cell *matFooterCellDef colspan="6">
+                                  No hay artículos ligados a esta compra
+                              </mat-footer-cell>
+                          </ng-container>
+                          <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+                          <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+                          <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+                      </mat-table>
+                      <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+                  </div>
+                </div> 
+
+
+                </div>  
+                <hr class="my-5" />
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+                  </div>
+                  <div class="col-md-2">
+                    <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+                  </div>
+                  <div class="col-md-2">	
+                    <button mat-raised-button (click)="resetForm()">Vaciar <mat-icon>delete_sweep</mat-icon></button>
+                  </div>
+                  <div class="col-md-2">	
+                      <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</form>

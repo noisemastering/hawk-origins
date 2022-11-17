@@ -1,0 +1,143 @@
+<div class="container-fluid">
+  <div class="col-md-12"> 
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br><br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+          <div class="form-group row">
+            <div class="col-lg-10">&nbsp;</div>  
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/locaciones.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Almacén</label>	
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="almacen" [(value)]="locacion.NAAlmacen.Nombre" readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-1">&nbsp;</div>
+            <label class="col-sm-1 col-form-label">Locación *</label>	
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="locacion" [(value)]="locacion.Nombre" readonly>
+              </mat-form-field>
+            </div>
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label"><strong>Artículo</strong></label>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="articulo" [(value)]="articulo.Nombre" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Nombre del artículo.</small>
+            </div>
+            <label class="col-sm-1 col-form-label"><strong>ID</strong></label>
+            <div class="col-sm-3">
+              <mat-form-field>
+                <input type="text" matInput formControlName="firebaseID" [(value)]="articulo.FirebaseID" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Identificador de este artículo.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label"><strong>Tipo</strong></label>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input type="text" matInput formControlName="tipo" [(value)]="articulo.Tipo" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Tipo de artículo.</small>
+            </div>
+            <label class="col-sm-1 col-form-label">&nbsp;</label>	
+            <label class="col-sm-1 col-form-label"><strong>Categoría</strong></label>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input type="text" matInput formControlName="categoria" [(value)]="articulo.Categoria" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Categoría de este artículo.</small>
+            </div>
+            <label class="col-sm-1 col-form-label">&nbsp;</label>	
+            <label class="col-sm-1 col-form-label"><strong>Subcategoría</strong></label>
+            <div class="col-sm-2">
+              <mat-form-field>
+                <input type="text" matInput formControlName="subcategoria" [(value)]="articulo.Subcategoria" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Subcategoría de este artículo.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label"><strong>Stock mínimo global</strong></label>
+            <div class="col-sm-1">
+              <mat-form-field>
+                <input type="text" matInput formControlName="minimoGlobal" [(value)]="articulo.StockMinimo" readonly>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">{{um | titlecase}}</label>
+            <label class="col-sm-1 col-form-label">&nbsp;</label>	
+            <label class="col-sm-2 col-form-label"><strong>Stock máximo global</strong></label>
+            <div class="col-sm-1">
+              <mat-form-field>
+                <input type="text" matInput formControlName="maximoGlobal" [(value)]="articulo.StockMaximo" readonly>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">{{um | titlecase}}</label>
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">Stock Mínimo *</label>	
+            <div class="col-sm-1">
+              <mat-form-field>
+              <input type="text" placeholder="0" matInput formControlName="stockMinimo" (blur)="validateStock(this)">
+              <mat-error *ngIf="f.stockMinimo.errors?.required">Este campo es requerido.</mat-error>
+              <mat-error *ngIf="f.stockMinimo.errors?.max">El stock mínimo no puede ser igual o mayor al stock máximo.</mat-error>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">{{um}}</label>	
+            <div class="col-sm-1">&nbsp;</div>
+            <label class="col-sm-1 col-form-label">Stock Máximo *</label>	
+            <div class="col-sm-1">
+              <mat-form-field>
+              <input type="text" placeholder="0" matInput formControlName="stockMaximo" (blur)="validateStock(this)">
+              <mat-error *ngIf="f.stockMaximo.errors?.required">Este campo es requerido.</mat-error>
+              <mat-error *ngIf="f.stockMaximo.errors?.max">No es posible asignar un valor mayor al stock global de un artículo.</mat-error>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">{{um}}</label>	
+            <div class="col-sm-1">&nbsp;</div>
+            <label class="col-sm-1 col-form-label">Existencias</label>	
+            <div class="col-sm-1">
+              <mat-form-field>
+              <input type="text" placeholder="0" matInput formControlName="existencias" (blur)="validateExistencias(this)">
+              <mat-error *ngIf="f.stockMaximo.errors?.required">Este campo es requerido.</mat-error>
+              </mat-form-field>
+            </div>
+            <label class="col-sm-1 col-form-label">{{um}}</label>	
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-6">
+              <div class="alert alert-danger" *ngIf="theForm.invalid && submitted">Revise el formulario</div>
+            </div>
+            <div class="col-md-2">
+              <button mat-raised-button (click)="validate()" color="primary">Guardar <mat-icon>save</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+              <button mat-raised-button (click)="resetForm()">Vaciar <mat-icon>delete_sweep</mat-icon></button>
+            </div>
+            <div class="col-md-2">	
+                <button mat-raised-button (click)="onClose()" color="warn">Cancelar <mat-icon>clear</mat-icon></button>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

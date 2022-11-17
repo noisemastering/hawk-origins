@@ -1,0 +1,98 @@
+<div class="container-fluid">
+  <div class="col-md-12">
+    <mat-toolbar color="primary">
+      <span class="fill-remaining-space"></span>
+      <span>{{title}}</span>
+      <span class="fill-remaining-space"></span>
+      <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabindex="-1"><mat-icon>clear</mat-icon></button>
+    </mat-toolbar>
+    <br><br>
+    <div class="dashboard-right">
+      <div class="dashboard">
+        <form [formGroup]='theForm' class="normal-form">
+            <div class="form-group row">
+                <div class="col-lg-10">&nbsp;</div>  
+                <div class="col-lg-2">
+                  <span class="text-right"><img src="assets/images/pages/almacenes.png" class="img-fluid" alt=""></span>  
+                </div>
+              </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">ID</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input type="text" placeholder="Nombre del almacén" matInput formControlName="itemID" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Nombre con el que identificará el almacén.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Nombre *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <input type="text" placeholder="Nombre del almacén" matInput formControlName="descripcion" readonly>
+              </mat-form-field>
+              <small class="form-text text-muted">Nombre con el que identificará el almacén.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Descripción *</label>	
+            <div class="col-lg-8">
+              <mat-form-field>
+                <textarea   formControlName="notas" rows="3" matInput  placeholder="Descripción no mayor a 160 caracteres..." readonly></textarea>
+              </mat-form-field>
+              <small class="form-text text-muted">Datos descriptivos del almacén.</small>
+            </div>
+            <div class="col-sm-2">&nbsp;</div>
+          </div>
+          <hr />
+          <div class="form-group row">
+            <div class="col-lg-7">
+              <h4 class="mt-3 mb-3">Locaciones</h4>
+            </div>
+            <div class="col-lg-3">
+              <br>
+              <button class="btn-dialog-close" mat-raised-button>Administrar Locaciones<mat-icon>edit</mat-icon></button>  
+            </div>
+            <div class="col-lg-2">
+              <span class="text-right"><img src="assets/images/pages/locaciones.png" class="img-fluid" alt=""></span>  
+            </div>
+          </div>
+          <div class="mat-elevation-z8">
+            <mat-table [dataSource]="listData" matSort>
+              <ng-container matColumnDef="Nombre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.Nombre}}</mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="Acciones">
+                <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    <button mat-icon-button (click)="locationItems(row)"><mat-icon>view_agenda</mat-icon></button>
+                    <button mat-icon-button (click)="locationDetail(row)"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button (click)="locationEdit(row)"><mat-icon>visibility</mat-icon></button>
+                  </mat-cell>
+              </ng-container>
+              <mat-header-row *matHeaderRowDef="displayColumns;"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+            </mat-table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 15, 25]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+          </div>
+          <hr class="my-5" />
+          <div class="form-group row">
+            <div class="col-md-6">
+              &nbsp;
+            </div>
+            <div class="col-md-2">
+              &nbsp;
+            </div>
+            <div class="col-md-2">	
+              &nbsp;
+            </div>
+            <div class="col-md-2">	
+                <button mat-raised-button (click)="onClose()" color="primary">OK <mat-icon>done</mat-icon></button>
+              </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

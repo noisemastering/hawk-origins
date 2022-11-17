@@ -1,0 +1,33 @@
+export class Proveedor {
+  	ID: string; 
+	Descripcion: string;
+	Activo: string;
+	Telefono: string;
+	Celular: string;
+	CorreoElectronico: string;
+	Notas: string;
+	TotalCompras: string;
+	TotalPagos: string;
+	RazonSocial: string;
+	RFC: string;
+	CURP: string;
+	Contacto: string;
+	Direccion1: string;
+	Direccion2: string;
+	DelegacionMunicipio: string;
+	Ciudad: string;
+	Estado: string;
+	Telefonos: string;
+	PaginaWeb: string;
+	DiasCredito: string;
+	uaFecha: string;
+	uaUsuario: string;
+	crFecha: string;
+	crUsuario: string;
+	Fax: string;
+	CP: string;
+	CuentaContable: string;
+	ZipID: string;
+	Keywords: string;
+	serviceURL?: string= 'http://noiseapp.com.mx/hawk/process-proveedor.php';
+}
